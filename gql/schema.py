@@ -78,7 +78,7 @@ class Auth(graphene.Mutation):
             raise InvalidPassword(email).error
 
         access_token = get_token(user.id)
-        return Auth(access_token=token, refresh_token="")
+        return Auth(access_token=access_token, refresh_token="")
 
 
 class Mutation(graphene.ObjectType):

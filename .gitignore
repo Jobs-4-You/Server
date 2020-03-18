@@ -174,3 +174,4 @@ dmypy.json
 
 .vscode
 .env
+.ENV.sh
