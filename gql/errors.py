@@ -38,3 +38,15 @@ class InvalidPassword(AuthError):
         err_msg = f"Mot de passe invalide pour l'utilisateur: {email}"
         super().__init__(2, err_msg)
 
+
+class NotAuthenticated(AuthError):
+    def __init__(self):
+        err_msg = f"Utilisateur non connecte"
+        super().__init__(3, err_msg)
+
+
+class NotAuthorized(AuthError):
+    def __init__(self):
+        err_msg = f"Utilisateur non autorise"
+        super().__init__(4, err_msg)
+

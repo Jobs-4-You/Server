@@ -9,12 +9,13 @@ class ConfigCommon:
     APP_KEY = os.environ.get("APP_KEY")
     SALT = os.environ.get("SALT")
     JWT_KEY = os.environ.get("JWT_KEY")
-    ADMIN_PWORD = os.environ.get("ADMIN_PWORD")
-    MYSQL_USER = os.environ.get("MYSQL_USER")
-    MYSQL_PWD = os.environ.get("MYSQL_PWD")
-    MONGO_USER = os.environ.get("MONGO_USER")
-    MONGO_PWD = os.environ.get("MONGO_PWD")
-    UPDATE_PWD = os.environ.get("UPDATE_PWD")
+    POSTGRES_USER = os.environ["POSTGRES_USER"]
+    POSTGRES_PW = os.environ["POSTGRES_PW"]
+    POSTGRES_DB = os.environ["POSTGRES_DB"]
+    POSTGRES_IP="127.0.0.1"
+    ELASTIC_USER = os.environ["ELASTIC_USER"]
+    ELASTIC_PW = os.environ["ELASTIC_PW"]
+
 
     def __repr__(self):
         res = {}
@@ -23,6 +24,11 @@ class ConfigCommon:
                 res[key] = getattr(self, key)
         return to_pretty_string(res)
 
+    @property
+    def DB_URL(self):
+        return f"postgres://{self.POSTGRES_USER}:{self.POSTGRES_PW}@{self.POSTGRES_IP}/{self.POSTGRES_DB}"
+
+
 
 class ConfigDev(ConfigCommon):
     MODE = "dev"
@@ -30,7 +36,6 @@ class ConfigDev(ConfigCommon):
     APP_URL = "http://127.0.0.1:8080"
     HOST = "0.0.0.0"
     PORT = 5000
-    MYSQL_DB = "j4u-test"
 
 
 class ConfigProd(ConfigCommon):
@@ -39,7 +44,6 @@ class ConfigProd(ConfigCommon):
     APP_URL = "https://j4u.unil.ch"
     HOST = "127.0.0.1"
     PORT = 3000
-    MYSQL_DB = "j4u"
 
 
 if os.environ.get("ENV") == "prod":

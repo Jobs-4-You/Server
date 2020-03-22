@@ -1,10 +1,11 @@
+import graphene
+from functools import lru_cache
+
+graphene.Enum.from_enum = lru_cache(maxsize=None)(graphene.Enum.from_enum)
 from app import app
-from mysql_db.seed import seed_testing
 from config import config
 
-if __name__ == "__main__":
 
-    if config.MODE == "aa":
-        seed_testing()
+if __name__ == "__main__":
 
     app.run()

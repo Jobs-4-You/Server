@@ -1,0 +1,26 @@
+version: '3'
+
+services: 
+
+    j4u-postgres:
+        container_name: j4u-postgres
+        image: postgres:11-alpine
+        restart: always
+        ports: 
+            - 5432:5432
+        environment:
+            - POSTGRES_USER=${POSTGRES_USER}
+            - POSTGRES_PASSWORD=${POSTGRES_PW}
+            - POSTGRES_DB=${POSTGRES_DB}
+
+    j4u-elasticsearch:
+        container_name: j4u-elasticsearch
+        image: elasticsearch:7.6.1
+        restart: always
+        ports: 
+            - 9200:9200
+            - 9300:9300
+        environment:
+            - xpack.security.enabled=true
+            - discovery.type=single-node
+            - ELASTIC_PASSWORD=${ELASTIC_PW}

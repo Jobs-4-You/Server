@@ -1,4 +1,4 @@
-from .models import mysql_session, engine, Base, User
+from .models import db_session, engine, Base, User
 
 
 def seed_testing():
@@ -8,50 +8,44 @@ def seed_testing():
 
     admin = User(
         civilite="M",
+        role="ADMIN",
         firstName="admin",
         lastName="nimda",
         birthDate="2019-01-01",
         phone="0658062948",
         email="admin@example.com",
         pwd="jdida",
-        plastaId="a111111",
         surveyId="12073231",
         verified=True,
-        blocked=False,
-        fixedOldJobValue=False,
-        fixedAlphaBeta=False,
-        group="J4U+COGG",
+        group="J4UCOG",
     )
     other = User(
         civilite="M",
+        role="USER",
         firstName="other",
         lastName="nimda",
         birthDate="2019-01-01",
         phone="0658062947",
         email="other@example.com",
         pwd="jdida",
-        plastaId="009",
-        # surveyId="17813205",
         surveyId="12073231",
         verified=True,
-        blocked=False,
         group="COG",
     )
     ather = User(
         civilite="M",
+        role="USER",
         firstName="ather",
         lastName="nimda",
         birthDate="2019-01-01",
         phone="0658062949",
         email="ather@example.com",
         pwd="jdida",
-        plastaId="003",
-        # surveyId="86930465",
         surveyId="12073231",
         verified=True,
         group="CONT",
     )
 
-    mysql_session.add_all([admin, other, ather])
-    mysql_session.commit()
+    db_session.add_all([admin, other, ather])
+    db_session.commit()
     print("Seeding done.")

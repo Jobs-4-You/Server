@@ -4,11 +4,10 @@ from sqlalchemy.ext.declarative import declarative_base
 from werkzeug.security import generate_password_hash, check_password_hash
 from utils.print import to_pretty_string
 from config import config
+from .enums import RoleEnum, CiviliteEnum, GroupEnum
 
-engine = create_engine(
-    f"mysql+mysqldb://{config.MYSQL_USER}:{config.MYSQL_PWD}@127.0.0.1/{config.MYSQL_DB}"
-)
-mysql_session = scoped_session(
+engine = create_engine(config.DB_URL)
+db_session = scoped_session(
     sessionmaker(autocommit=False, autoflush=False, bind=engine)
 )
 
@@ -28,13 +27,13 @@ class BaseExt(object):
 
 Base = declarative_base(cls=BaseExt)
 # We will need this for querying
-Base.query = mysql_session.query_property()
+Base.query = db_session.query_property()
 
 
-class Features(Base):
+class Feature(Base):
     __tablename__ = "features"
     id = Column(Integer, primary_key=True)
-    userId = Column(ForeignKey("user.id"), nullable=False, unique=True)
+    userId = Column(ForeignKey("users.id"), nullable=False, unique=True)
     var1 = Column(Float, nullable=False)
     var2 = Column(Float, nullable=False)
     var3 = Column(Float, nullable=False)
@@ -50,16 +49,16 @@ class Features(Base):
 
 
 class User(Base):
-    __tablename__ = "user"
+    __tablename__ = "users"
     id = Column(Integer, primary_key=True)
-    civilite = Column(String(4))
-    firstName = Column(String(50))
-    lastName = Column(String(50))
-    birthDate = Column(Date())
+    role = Column(Enum(RoleEnum), default=RoleEnum.USER)
+    civilite = Column(Enum(CiviliteEnum), nullable=False)
+    firstName = Column(String(50), nullable=False)
+    lastName = Column(String(50), nullable=False)
+    birthDate = Column(Date(), nullable=False)
     email = Column(String(120), unique=True)
     phone = Column(String(16), unique=True)
-    pwd_hash = Column(String(256))
-    plastaId = Column(String(16), unique=False)
+    pwd_hash = Column(String(256), nullable=False)
     formDone = Column(Boolean(), default=False)
     surveyId = Column(String(10))
     verified = Column(Boolean(), default=False)
@@ -67,13 +66,13 @@ class User(Base):
     beta = Column(Float, nullable=True, default=50)
     oldJobValue = Column(Integer, nullable=True)
     oldJobLabel = Column(String(100), nullable=True)
-    features = relationship(Features, uselist=False)
-    blocked = Column(Boolean(), default=False)
+    features = relationship(Feature, uselist=False)
     fixedOldJobValue = Column(Boolean(), default=False)
     fixedAlphaBeta = Column(Boolean(), default=False)
-    group = Column(String(16))
+    group = Column(Enum(GroupEnum), nullable=False)
 
     def __init__(self, **kwargs):
+        # TODO Change surveyId behaviour
         kwargs["pwd_hash"] = self.hash_password(kwargs["pwd"])
         del kwargs["pwd"]
         if kwargs["surveyId"] is None:

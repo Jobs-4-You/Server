@@ -2,7 +2,7 @@
 from flask import Flask
 from flask_graphql import GraphQLView
 from flask_cors import CORS
-from mysql_db import mysql_session
+from database import db_session
 from gql import schema
 from config import config
 
@@ -18,4 +18,4 @@ app.add_url_rule(
 
 @app.teardown_appcontext
 def shutdown_session(exception=None):
-    mysql_session.remove()
+    db_session.remove()
