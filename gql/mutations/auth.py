@@ -1,6 +1,6 @@
 import graphene
 from database.models import User as UserModel
-from lib.auth import get_token
+from utils.token import create_auth_token
 from gql.errors import UserNotFound, InvalidPassword
 
 
@@ -19,5 +19,5 @@ class Auth(graphene.Mutation):
         if not user.check_password(password):
             raise InvalidPassword(email).error
 
-        access_token = get_token(user.id)
-        return Auth(access_token=access_token, refresh_token="")
+        access_token = create_auth_token(user.id)
+        return Auth(access_token=access_token, refresh_token="refresh")

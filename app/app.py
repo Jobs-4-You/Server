@@ -1,9 +1,9 @@
-# flask_sqlalchemy/app.py
 from flask import Flask
 from flask_graphql import GraphQLView
 from flask_cors import CORS
 from database import db_session
 from gql import schema
+from gql.middlewares import auth_middleware
 from config import config
 
 app = Flask(__name__)
@@ -12,7 +12,10 @@ app.debug = True
 
 
 app.add_url_rule(
-    "/graphql", view_func=GraphQLView.as_view("graphql", schema=schema, graphiql=True,),
+    "/graphql",
+    view_func=GraphQLView.as_view(
+        "graphql", schema=schema, graphiql=True, middleware=[auth_middleware]
+    ),
 )
 
 

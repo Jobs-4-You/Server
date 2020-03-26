@@ -5,7 +5,7 @@ services:
     j4u-postgres:
         container_name: j4u-postgres
         image: postgres:11-alpine
-        restart: always
+        restart: "no"
         ports: 
             - 5432:5432
         environment:
@@ -16,7 +16,7 @@ services:
     j4u-elasticsearch:
         container_name: j4u-elasticsearch
         image: elasticsearch:7.6.1
-        restart: always
+        restart: "no"
         ports: 
             - 9200:9200
             - 9300:9300

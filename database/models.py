@@ -1,5 +1,5 @@
 from sqlalchemy import *
-from sqlalchemy.orm import scoped_session, sessionmaker, relationship, backref
+from sqlalchemy.orm import scoped_session, sessionmaker, relationship
 from sqlalchemy.ext.declarative import declarative_base
 from werkzeug.security import generate_password_hash, check_password_hash
 from utils.print import to_pretty_string

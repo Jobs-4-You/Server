@@ -33,7 +33,7 @@ class ConfigCommon:
 class ConfigDev(ConfigCommon):
     MODE = "dev"
     URL = "http://127.0.0.1:5000"
-    APP_URL = "http://127.0.0.1:8080"
+    APP_URL = "http://127.0.0.1:300"
     HOST = "0.0.0.0"
     PORT = 5000
 

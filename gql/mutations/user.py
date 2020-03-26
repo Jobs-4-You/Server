@@ -1,6 +1,6 @@
 import graphene
 from database.models import User as UserModel
-from lib.auth import get_token
+from utils.auth import get_token
 from gql.errors import UserNotFound, InvalidPassword
 
 
