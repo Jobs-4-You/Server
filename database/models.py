@@ -1,3 +1,4 @@
+import random
 from sqlalchemy import *
 from sqlalchemy.orm import scoped_session, sessionmaker, relationship
 from sqlalchemy.ext.declarative import declarative_base
@@ -53,14 +54,14 @@ class User(Base):
     id = Column(Integer, primary_key=True)
     role = Column(Enum(RoleEnum), default=RoleEnum.USER)
     civilite = Column(Enum(CiviliteEnum), nullable=False)
-    firstName = Column(String(50), nullable=False)
-    lastName = Column(String(50), nullable=False)
-    birthDate = Column(Date(), nullable=False)
+    first_name = Column(String(50), nullable=False)
+    last_name = Column(String(50), nullable=False)
+    birth_date = Column(Date(), nullable=False)
     email = Column(String(120), unique=True)
     phone = Column(String(16), unique=True)
-    pwd_hash = Column(String(256), nullable=False)
+    password_hash = Column(String(256), nullable=False)
     formDone = Column(Boolean(), default=False)
-    surveyId = Column(String(10))
+    survey_id = Column(String(10), unique=True)
     verified = Column(Boolean(), default=False)
     alpha = Column(Float, nullable=True, default=50)
     beta = Column(Float, nullable=True, default=50)
@@ -72,13 +73,13 @@ class User(Base):
     group = Column(Enum(GroupEnum), nullable=False)
 
     def __init__(self, **kwargs):
-        # TODO Change surveyId behaviour
-        kwargs["pwd_hash"] = self.hash_password(kwargs["pwd"])
-        del kwargs["pwd"]
-        if kwargs["surveyId"] is None:
-            kwargs["surveyId"] = randint(10000000, 99999999)
-        else:
-            kwargs["surveyId"] = kwargs["surveyId"]
+        kwargs["password_hash"] = self.hash_password(kwargs["password"])
+        del kwargs["password"]
+        if kwargs.get("survey_id") is None:
+            unique_key = random.randint(10000000, 99999999)
+            while self.query.filter(self.survey_id == unique_key).first() is not None:
+                unique_key = random.randint(10000000, 99999999)
+            kwargs["survey_id"] = unique_key
         super(User, self).__init__(**kwargs)
 
     def hash_password(self, password):

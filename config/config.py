@@ -12,10 +12,9 @@ class ConfigCommon:
     POSTGRES_USER = os.environ["POSTGRES_USER"]
     POSTGRES_PW = os.environ["POSTGRES_PW"]
     POSTGRES_DB = os.environ["POSTGRES_DB"]
-    POSTGRES_IP="127.0.0.1"
+    POSTGRES_IP = "127.0.0.1"
     ELASTIC_USER = os.environ["ELASTIC_USER"]
     ELASTIC_PW = os.environ["ELASTIC_PW"]
-
 
     def __repr__(self):
         res = {}
@@ -29,11 +28,10 @@ class ConfigCommon:
         return f"postgres://{self.POSTGRES_USER}:{self.POSTGRES_PW}@{self.POSTGRES_IP}/{self.POSTGRES_DB}"
 
 
-
 class ConfigDev(ConfigCommon):
     MODE = "dev"
     URL = "http://127.0.0.1:5000"
-    APP_URL = "http://127.0.0.1:300"
+    APP_URL = "http://127.0.0.1:3000"
     HOST = "0.0.0.0"
     PORT = 5000
 

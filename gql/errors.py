@@ -50,3 +50,21 @@ class NotAuthorized(AuthError):
         err_msg = f"Utilisateur non autorise"
         super().__init__(4, err_msg)
 
+
+class Token(Error):
+    def __init__(self, sub_domain, err_msg):
+        self.sub_domain = sub_domain
+        self.err_msg = err_msg
+        super().__init__(200)
+
+
+class InvalidSignupLink(AuthError):
+    def __init__(self):
+        err_msg = f"Lien d'inscription invalide"
+        super().__init__(1, err_msg)
+
+
+class ExpiredSignupLink(AuthError):
+    def __init__(self):
+        err_msg = f"Lien d'inscription expiré"
+        super().__init__(1, err_msg)
