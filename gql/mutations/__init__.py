@@ -1,2 +1,2 @@
 from .auth import Auth
-from .user import CreateUser
+from .user import CreateUser, VerifyUser

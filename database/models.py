@@ -25,6 +25,13 @@ class BaseExt(object):
                 res[key] = getattr(self, key)
         return self.__class__.__name__ + to_pretty_string(res)
 
+    def to_dict(self):
+        res = {}
+        for key in sorted(self.__dict__.keys()):
+            if not key.startswith("_"):
+                res[key] = getattr(self, key)
+        return res
+
 
 Base = declarative_base(cls=BaseExt)
 # We will need this for querying
@@ -68,8 +75,6 @@ class User(Base):
     oldJobValue = Column(Integer, nullable=True)
     oldJobLabel = Column(String(100), nullable=True)
     features = relationship(Feature, uselist=False)
-    fixedOldJobValue = Column(Boolean(), default=False)
-    fixedAlphaBeta = Column(Boolean(), default=False)
     group = Column(Enum(GroupEnum), nullable=False)
 
     def __init__(self, **kwargs):
@@ -86,4 +91,4 @@ class User(Base):
         return generate_password_hash(password)
 
     def check_password(self, password):
-        return check_password_hash(self.pwd_hash, password)
+        return check_password_hash(self.password_hash, password)

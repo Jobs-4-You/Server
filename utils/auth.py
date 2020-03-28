@@ -1,4 +1,4 @@
-from gql.errors import NotAuthenticated, NotAuthorized
+from gql.errors.auth_errors import NotAuthenticated, NotAuthorized
 
 
 def jwt_auth_required(func):

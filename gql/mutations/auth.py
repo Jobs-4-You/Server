@@ -1,7 +1,7 @@
 import graphene
 from database.models import User as UserModel
 from utils.token import create_auth_token
-from gql.errors import UserNotFound, InvalidPassword
+from gql.errors.auth_errors import UserNotFound, InvalidPassword
 
 
 class Auth(graphene.Mutation):

@@ -6,7 +6,7 @@ from database.models import User as UserModel, Feature as FeatureModel
 class User(SQLAlchemyObjectType):
     class Meta:
         model = UserModel
-        exclude_fields = ("pwd_hash", "fixedOldJobValue", "fixedAlphaBeta")
+        exclude_fields = ("password_hash",)
 
 
 class Feature(SQLAlchemyObjectType):
