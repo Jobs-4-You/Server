@@ -1,3 +1,6 @@
+.vscode
+.env
+.ENV.sh
 
 # Created by https://www.gitignore.io/api/flask,python,visualstudiocode
 # Edit at https://www.gitignore.io/?templates=flask,python,visualstudiocode
@@ -171,7 +174,3 @@ dmypy.json
 .history
 
 # End of https://www.gitignore.io/api/flask,python,visualstudiocode
-
-.vscode
-.env
-.ENV.sh
