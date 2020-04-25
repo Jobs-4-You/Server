@@ -1,7 +1,8 @@
-# curl -H 'X-API-TOKEN: yourapitoken' 'https://yourdatacenterid.qualtrics.com/API/v3/surveys'
 import requests
 
 from j4u_api.config import config
+
+from .export import export
 
 
 def pretty_print_req(req):
@@ -44,6 +45,21 @@ class Qualtrics:
         res = self._make_request("GET", url)
         data = res.json()["result"]["elements"]
         return data
+
+    def list_libraries(self):
+        url = f"{self.base_url}/libraries"
+        res = self._make_request("GET", url)
+        data = res.json()["result"]["elements"]
+        return data
+
+    def list_library_surveys(self, library_id):
+        url = f"{self.base_url}/libraries/{library_id}/survey/surveys"
+        res = self._make_request("GET", url)
+        data = res.json()["result"]["elements"]
+        return data
+
+    def export_responses(self, survey_id):
+        return export(self.token, self.data_center, survey_id)
 
 
 qual_client = Qualtrics(config.QUALTRICS_TOKEN, "eu")

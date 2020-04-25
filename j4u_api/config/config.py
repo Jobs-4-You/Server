@@ -14,8 +14,6 @@ class ConfigCommon:
     POSTGRES_PW = os.environ["POSTGRES_PW"]
     POSTGRES_DB = os.environ["POSTGRES_DB"]
     POSTGRES_IP = "127.0.0.1"
-    ELASTIC_USER = os.environ["ELASTIC_USER"]
-    ELASTIC_PW = os.environ["ELASTIC_PW"]
     QUALTRICS_USER = os.environ["QUALTRICS_USER"]
     QUALTRICS_TOKEN = os.environ["QUALTRICS_TOKEN"]
 

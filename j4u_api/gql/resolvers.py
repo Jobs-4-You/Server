@@ -1,22 +1,27 @@
 import humps
 
+import j4u_api.database.models as models
 import j4u_api.gql.types as types
 from j4u_api.config import config
 from j4u_api.database.enums import RoleEnum
+from j4u_api.job_room import job_room_client
+from j4u_api.jobs_search import jobs_searcher
 from j4u_api.qualtrics import qual_client
+from j4u_api.recommendations import recom_engine
 from j4u_api.utils.auth import jwt_auth_required, roles_required
+from j4u_api.utils.func import pick_rename
 from j4u_api.utils.token import create_signup_token
 
 
 @roles_required([RoleEnum.ADMIN])
 def resolve_all_users(parent, info):
-    query = types.User.get_query(info)  # SQLAlchemy query
+    query = models.User.query
     return query.all()
 
 
 @roles_required([RoleEnum.ADMIN])
 def resolve_all_groups(parent, info):
-    query = types.Group.get_query(info)  # SQLAlchemy query
+    query = models.Group.query
     return query.all()
 
 
@@ -39,5 +44,93 @@ def resolve_all_surveys(parent, info):
     for d in data:
         sm = types.SurveyMeta(**d)
         res.append(sm)
-    print(res)
+    return res
+
+
+def resolve_job_search_hints(parent, info, query, limit=5):
+    res = jobs_searcher.search(query, limit)
+    return res
+
+
+def resolve_positions(parent, info, profession_codes, page):
+    total_count, positions = job_room_client.search(profession_codes, page)
+
+    paths = [
+        # Genral
+        ("id", "jobAdvertisement.id"),
+        ("job_quantity", "jobAdvertisement.jobContent.numberOfJobs"),
+        # Company
+        ("company.name", "jobAdvertisement.jobContent.company.name"),
+        ("company.city", "jobAdvertisement.jobContent.company.city"),
+        ("company.street", "jobAdvertisement.jobContent.company.street"),
+        ("company.postal_code", "jobAdvertisement.jobContent.company.postalCode"),
+        ("company.house_number", "jobAdvertisement.jobContent.company.houseNumber"),
+        ("company.country_code", "jobAdvertisement.jobContent.company.countryIsoCode"),
+        # Employment
+        ("employment.start_date", "jobAdvertisement.jobContent.employment.startDate"),
+        ("employment.end_date", "jobAdvertisement.jobContent.employment.endDate"),
+        ("employment.short", "jobAdvertisement.jobContent.employment.shortEmployment"),
+        (
+            "employment.immediately",
+            "jobAdvertisement.jobContent.employment.immediately",
+        ),
+        ("employment.permanent", "jobAdvertisement.jobContent.employment.permanent"),
+        (
+            "employment.workload_perc_min",
+            "jobAdvertisement.jobContent.employment.workloadPercentageMin",
+        ),
+        (
+            "employment.workload_perc_max",
+            "jobAdvertisement.jobContent.employment.workloadPercentageMax",
+        ),
+        # Location
+        ("location.city", "jobAdvertisement.jobContent.location.city"),
+        (
+            "location.country_code",
+            "jobAdvertisement.jobContent.location.countryIdoCode",
+        ),
+        ("location.canton_code", "jobAdvertisement.jobContent.location.cantonCode"),
+        # Contact
+        ("contact.salutation", "jobAdvertisement.jobContent.publicContact.salutation"),
+        ("contact.first_name", "jobAdvertisement.jobContent.publicContact.firstName"),
+        ("contact.last_name", "jobAdvertisement.jobContent.publicContact.lastName"),
+        ("contact.phone", "jobAdvertisement.jobContent.publicContact.phone"),
+        ("contact.email", "jobAdvertisement.jobContent.publicContact.email"),
+    ]
+
+    processed_positions = []
+    for position in positions:
+        p = pick_rename(position, paths)
+
+        desc_paths = [
+            ("language_code", "languageIsoCode"),
+            ("title", "title"),
+            ("description", "description"),
+        ]
+
+        p["descriptions"] = []
+        descs = position["jobAdvertisement"]["jobContent"]["jobDescriptions"]
+        if type(descs) is list:
+            for desc in descs:
+                processed_desc = pick_rename(desc, desc_paths)
+                p["descriptions"].append(processed_desc)
+
+        processed_positions.append(p)
+
+    res = {
+        "total_count": total_count,
+        "positions": processed_positions,
+    }
+
+    return res
+
+
+def resolve_recommendations(parent, info, old_job_isco08, alpha, beta):
+    user = models.User.query.get(1)
+    features = [(x.feature_config.engine_name, x.value) for x in user.features]
+    features = sorted(features, key=lambda x: x[0])
+    _, features = zip(*features)
+    vars = list(features) + [alpha, 7536, beta]
+    res = recom_engine.recom(*vars)
+
     return res

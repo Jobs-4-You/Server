@@ -11,3 +11,9 @@ class UserInput(graphene.InputObjectType):
     email = graphene.String(required=True)
     password = graphene.String(required=True)
     phone = graphene.String(required=True)
+
+
+class GroupInput(graphene.InputObjectType):
+    name = graphene.String(required=True)
+    baseline_id = graphene.ID(required=True)
+    cruiser_id = graphene.ID(required=True)

@@ -6,7 +6,6 @@ import graphene
 
 from j4u_api.database import engine
 from j4u_api.database.seed import seed_testing
-from j4u_api.elastic import create_all_indices, delete_all_indices, import_jobs
 
 graphene.Enum.from_enum = lru_cache(maxsize=None)(graphene.Enum.from_enum)
 
@@ -34,9 +33,6 @@ def fresh_start_and_seed():
     os.system("rm ./alembic/versions/* -rf")
     os.system("alembic revision --autogenerate")
     os.system("alembic upgrade head")
-    delete_all_indices()
-    create_all_indices()
-    import_jobs()
     seed_testing()
 
 

@@ -2,28 +2,30 @@
 import graphene
 
 from j4u_api.database import db_session
+from j4u_api.database.enums import RoleEnum
 from j4u_api.database.models import Group as GroupModel
+from j4u_api.gql.input_types import GroupInput
 from j4u_api.gql.types import Group
+from j4u_api.utils.auth import roles_required
 
 
-class UpdateGroupSurveys(graphene.Mutation):
+class UpdateGroupConfig(graphene.Mutation):
     class Arguments:
-        group_id = graphene.String(required=True)
-        baseline_id = graphene.String()
-        cruiser_id = graphene.String()
+        group_id = graphene.ID(required=True)
+        group_data = GroupInput(required=True)
 
-    group = graphene.Field(Group, required=True)
+    group = graphene.Field(Group)
 
-    def mutate(root, info, group_id, baseline_id, cruiser_id):
-        group = GroupModel.query.filter(Group.id == group_id)
-
-        if baseline_id:
-            group.baseline_id = baseline_id
-        if cruiser_id:
-            group.cruiser_id = cruiser_id
+    @roles_required([RoleEnum.ADMIN])
+    def mutate(root, info, group_id, group_data):
+        group = GroupModel.query.get(group_id)
+        print(group)
+        for k, v in group_data.items():
+            setattr(group, k, v)
 
         db_session.add(group)
         db_session.commit()
-        group = GroupModel.query.filter(Group.id == group_id)
-
-        return UpdateGroupSurveys(group=group)
+        group = GroupModel.query.get(group_id)
+        print(group_data)
+        print(group)
+        return UpdateGroupConfig(group=group)

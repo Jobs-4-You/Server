@@ -1,6 +1,6 @@
 import jwt
 
-from database.models import User
+from j4u_api.database.models import User
 from j4u_api.errors.token_errors import SessionExpired
 from utils.token import extract_from_token
 
@@ -11,7 +11,7 @@ def auth_middleware(next, root, info, **args):
     if token:
         try:
             user_id = extract_from_token(token)["user_id"]
-            user = User.query.filter(User.id == user_id).first()
+            user = User.query.get(user_id)
         except jwt.DecodeError as err:
             print("DcodeError")
             print(err)
