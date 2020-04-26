@@ -141,24 +141,26 @@ class Engine:
         )
         print("Done ! ")
 
-        isco08 = list(res[0])
-        jobs_title = [self.code_to_title[r] for r in res[0]]
-        avam = []
-        bfs = []
+        isco08_list = list(res[0])
+        job_title_list = []
+        avam_list = []
+        bfs_list = []
         df = self.jobs
-        for cc in isco08:
+        for cc in isco08_list:
             matches = df.loc[df["isco08"] == cc]
             avams = matches["avam"].values.tolist()
             bfss = matches["bfs"].values.tolist()
+            job_titles = matches["title"].values.tolist()
 
-            avam += avams
-            bfs += bfss
+            avam_list += avams
+            bfs_list += bfss
+            job_title_list += job_titles
 
         return {
             "var_list": list_var,
-            "isco08_list": isco08,
-            "jobs": jobs_title,
-            "avam_list": avam,
-            "bfs_list": bfs,
+            "isco08_list": isco08_list,
+            "job_title_list": job_title_list,
+            "avam_list": avam_list,
+            "bfs_list": bfs_list,
             "importances": list(res[1]),
         }

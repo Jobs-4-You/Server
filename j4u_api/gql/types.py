@@ -119,11 +119,15 @@ class PostionsResult(graphene.ObjectType):
     positions = graphene.List(JobRoomPosition, required=True)
 
 
+class IndividuaJobRecommendation(graphene.ObjectType):
+    isco08 = graphene.Int(required=True)
+    avam = graphene.Int(required=True)
+    bfs = graphene.Int(required=True)
+    job_title = graphene.String(required=True)
+
+
 class RecommendationResult(graphene.ObjectType):
     id = graphene.ID(required=True)
     var_list = graphene.List(graphene.Float, required=True)
-    isco08_list = graphene.List(graphene.Float, required=True)
-    avam_list = graphene.List(graphene.Float, required=True)
-    bfs_list = graphene.List(graphene.Float, required=True)
-    job_title_list = graphene.List(graphene.String, required=True)
     importances = graphene.List(graphene.Float, required=True)
+    results = graphene.List(IndividuaJobRecommendation, required=True)

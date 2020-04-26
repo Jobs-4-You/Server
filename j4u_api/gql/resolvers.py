@@ -21,7 +21,7 @@ def resolve_all_users(parent, info):
 
 @roles_required([RoleEnum.ADMIN])
 def resolve_all_groups(parent, info):
-    query = models.Group.query
+    query = models.Group.query.order_by(models.Group.name)
     return query.all()
 
 
@@ -125,12 +125,36 @@ def resolve_positions(parent, info, profession_codes, page):
     return res
 
 
+@jwt_auth_required
 def resolve_recommendations(parent, info, old_job_isco08, alpha, beta):
-    user = models.User.query.get(1)
+    user = info.context.user
     features = [(x.feature_config.engine_name, x.value) for x in user.features]
     features = sorted(features, key=lambda x: x[0])
     _, features = zip(*features)
-    vars = list(features) + [alpha, 7536, beta]
-    res = recom_engine.recom(*vars)
+    vars = list(features) + [alpha, old_job_isco08, beta]
+    recoms = recom_engine.recom(*vars)
+    res = {}
+    res["var_list"] = recoms["var_list"]
+    res["importances"] = recoms["importances"]
+    res_list = list(
+        zip(
+            recoms["isco08_list"],
+            recoms["avam_list"],
+            recoms["bfs_list"],
+            recoms["job_title_list"],
+        )
+    )
+    res_list = [
+        dict(
+            [
+                ("isco08", isco08),
+                ("avam", avam),
+                ("bfs", bfs),
+                ("job_title", job_title.title()),
+            ]
+        )
+        for isco08, avam, bfs, job_title in res_list
+    ]
+    res["results"] = sorted(res_list, key=lambda x: x["job_title"])
 
     return res
