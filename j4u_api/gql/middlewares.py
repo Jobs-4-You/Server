@@ -19,4 +19,5 @@ def auth_middleware(next, root, info, **args):
             raise SessionExpired()
 
     info.context.user = user
+
     return next(root, info, **args)
