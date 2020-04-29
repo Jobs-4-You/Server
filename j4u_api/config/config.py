@@ -1,21 +1,14 @@
 import os
 
+from dotenv import dotenv_values, load_dotenv
+
 from j4u_api.utils.print import to_pretty_string
 
 
-class ConfigCommon:
-    COMMON = "COMMON"
-    EMAIL_USER = os.environ.get("MAIL_USER")
-    EMAIL_PWD = os.environ.get("MAIL_PWD")
-    APP_KEY = os.environ.get("APP_KEY")
-    SALT = os.environ.get("SALT")
-    JWT_KEY = os.environ.get("JWT_KEY")
-    POSTGRES_USER = os.environ["POSTGRES_USER"]
-    POSTGRES_PW = os.environ["POSTGRES_PW"]
-    POSTGRES_DB = os.environ["POSTGRES_DB"]
-    POSTGRES_IP = "127.0.0.1"
-    QUALTRICS_USER = os.environ["QUALTRICS_USER"]
-    QUALTRICS_TOKEN = os.environ["QUALTRICS_TOKEN"]
+class Config:
+    def __init__(self, keys):
+        for k in keys:
+            setattr(self, k, os.environ[k])
 
     def __repr__(self):
         res = {}
@@ -32,25 +25,9 @@ class ConfigCommon:
         )
 
 
-class ConfigDev(ConfigCommon):
-    MODE = "dev"
-    URL = "http://127.0.0.1:5000"
-    APP_URL = "http://127.0.0.1:3000"
-    HOST = "0.0.0.0"
-    PORT = 5000
+env_dict = dotenv_values("../.dotenv")
+load_dotenv("../.dotenv")
+config = Config(env_dict.keys())
 
-
-class ConfigProd(ConfigCommon):
-    MODE = "prod"
-    URL = "https://j4u.unil.ch:5000"
-    APP_URL = "https://j4u.unil.ch"
-    HOST = "127.0.0.1"
-    PORT = 3000
-
-
-if os.environ.get("ENV") == "prod":
-    config = ConfigProd()
-elif os.environ.get("ENV") == "dev":
-    config = ConfigDev()
-else:
-    raise Exception("Config environment not set")
+print(config)
+exit()
