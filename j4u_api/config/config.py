@@ -10,7 +10,7 @@ class Config:
     MODE = None
     # Email
     EMAIL_USER = None
-    EMAIL_PWD = None
+    EMAIL_PW = None
     # App secrets
     APP_KEY = None
     SALT = None

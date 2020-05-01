@@ -22,7 +22,7 @@ app.config.update(
         MAIL_SERVER="smtp.unil.ch",
         MAIL_PORT=587,
         MAIL_USERNAME=config.EMAIL_USER,
-        MAIL_PASSWORD=config.EMAIL_PWD,
+        MAIL_PASSWORD=config.EMAIL_PW,
     )
 )
 
