@@ -44,7 +44,7 @@ app.add_url_rule(
 
 @app.route("/certificate", methods=["POST"])
 @cross_origin()  # allow all origins all methods.
-def certificate()
+def certificate():
     content = request.get_json()
     templateData = {
         "civilite": content["civilite"],
