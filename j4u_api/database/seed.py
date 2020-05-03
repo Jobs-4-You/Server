@@ -1,5 +1,5 @@
 from j4u_api.database import db_session, engine
-from j4u_api.database.models import Base, FeatureConfig, Group, User
+from j4u_api.database.models import Base, FeatureConfig, Group, UIConfig, User
 
 baseline_ids = {
     "COG": "SV_emNJjF8ZCQPAyA5",
@@ -155,7 +155,12 @@ def seed_testing():
     for (name, baseline_id), (_, cruiser_id) in zip(
         baseline_ids.items(), cruiser_ids.items()
     ):
-        g = Group(name=name, baseline_id=baseline_id, cruiser_id=cruiser_id)
+        g = Group(
+            name=name,
+            baseline_id=baseline_id,
+            cruiser_id=cruiser_id,
+            ui_config=UIConfig(),
+        )
         groups.append(g)
 
     admin = User(

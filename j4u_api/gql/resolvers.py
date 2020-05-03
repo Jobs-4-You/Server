@@ -3,6 +3,7 @@ import humps
 import j4u_api.database.models as models
 import j4u_api.gql.types as types
 from j4u_api.config import config
+from j4u_api.database.connection import db_session
 from j4u_api.database.enums import RoleEnum
 from j4u_api.job_room import job_room_client
 from j4u_api.jobs_search import jobs_searcher
@@ -59,6 +60,7 @@ def resolve_positions(parent, info, profession_codes, page):
         # Genral
         ("id", "jobAdvertisement.id"),
         ("job_quantity", "jobAdvertisement.jobContent.numberOfJobs"),
+        ("external_url", "jobAdvertisement.jobContent.externalUrl"),
         # Company
         ("company.name", "jobAdvertisement.jobContent.company.name"),
         ("company.city", "jobAdvertisement.jobContent.company.city"),
@@ -126,7 +128,7 @@ def resolve_positions(parent, info, profession_codes, page):
 
 
 @jwt_auth_required
-def resolve_recommendations(parent, info, old_job_isco08, alpha, beta):
+def resolve_recommendations(parent, info, old_job_isco08, old_job_title, alpha, beta):
     user = info.context.user
     features = [(x.feature_config.engine_name, x.value) for x in user.features]
     features = sorted(features, key=lambda x: x[0])
@@ -155,6 +157,14 @@ def resolve_recommendations(parent, info, old_job_isco08, alpha, beta):
         )
         for isco08, avam, bfs, job_title in res_list
     ]
+
+    user.alpha = alpha
+    user.beta = beta
+    user.old_job_isco08 = old_job_isco08
+    user.old_job_title = old_job_title
+    db_session.add(user)
+    db_session.commit()
+
     res["results"] = sorted(res_list, key=lambda x: x["job_title"])
 
     return res

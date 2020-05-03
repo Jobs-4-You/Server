@@ -62,18 +62,23 @@ class Feature(Base):
 class UIConfig(Base):
     __tablename__ = "ui_configs"
     id = S.Column(S.Integer, primary_key=True)
-    search = S.Column(S.Boolean, default=False)
     group_id = S.Column(S.ForeignKey("groups.id"), nullable=False)
+    group = relationship("Group", back_populates="ui_config")
+    search = S.Column(S.Boolean, default=False)
+    alpha_fixed = S.Column(S.Boolean, default=False)
+    beta_fixed = S.Column(S.Boolean, default=False)
 
 
 class Group(Base):
     __tablename__ = "groups"
     id = S.Column(S.Integer, primary_key=True)
     name = S.Column(S.String(64), nullable=False)
+    ui_config = relationship(
+        "UIConfig", uselist=False, back_populates="group", cascade="all, delete-orphan"
+    )
     users = relationship("User", back_populates="group")
     baseline_id = S.Column(S.String(64))
     cruiser_id = S.Column(S.String(64))
-    ui_config = relationship("UIConfig")
 
 
 class User(Base):
@@ -91,9 +96,10 @@ class User(Base):
     form_done_at = S.Column(S.Date)
     survey_id = S.Column(S.String(10), unique=True)
     verified = S.Column(S.Boolean(), default=False)
-    alpha = S.Column(S.Float, nullable=True, default=50)
-    beta = S.Column(S.Float, nullable=True, default=50)
-    old_job_id = S.Column(S.Integer)
+    alpha = S.Column(S.Float, nullable=True)
+    beta = S.Column(S.Float, nullable=True)
+    old_job_isco08 = S.Column(S.Integer)
+    old_job_title = S.Column(S.String(128))
     features = relationship("Feature", back_populates="user")
     group_id = S.Column(S.ForeignKey("groups.id"), nullable=False)
     group = relationship(Group, back_populates="users", uselist=False)

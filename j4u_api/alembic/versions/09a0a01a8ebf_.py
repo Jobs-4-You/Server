@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 6296fc5b6aaa
+Revision ID: 09a0a01a8ebf
 Revises: 
-Create Date: 2020-04-30 20:04:41.819813
+Create Date: 2020-05-03 12:35:49.799243
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '6296fc5b6aaa'
+revision = '09a0a01a8ebf'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -40,8 +40,10 @@ def upgrade():
     )
     op.create_table('ui_configs',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('search', sa.Boolean(), nullable=True),
     sa.Column('group_id', sa.Integer(), nullable=False),
+    sa.Column('search', sa.Boolean(), nullable=True),
+    sa.Column('alpha_fixed', sa.Boolean(), nullable=True),
+    sa.Column('beta_fixed', sa.Boolean(), nullable=True),
     sa.ForeignKeyConstraint(['group_id'], ['groups.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
@@ -61,7 +63,8 @@ def upgrade():
     sa.Column('verified', sa.Boolean(), nullable=True),
     sa.Column('alpha', sa.Float(), nullable=True),
     sa.Column('beta', sa.Float(), nullable=True),
-    sa.Column('old_job_id', sa.Integer(), nullable=True),
+    sa.Column('old_job_isco08', sa.Integer(), nullable=True),
+    sa.Column('old_job_title', sa.String(length=128), nullable=True),
     sa.Column('group_id', sa.Integer(), nullable=False),
     sa.ForeignKeyConstraint(['group_id'], ['groups.id'], ),
     sa.PrimaryKeyConstraint('id'),

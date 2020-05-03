@@ -3,25 +3,28 @@ from datetime import datetime
 import graphene
 from graphene_sqlalchemy import SQLAlchemyObjectType
 
-from j4u_api.database.models import Feature as FeatureModel
-from j4u_api.database.models import Group as GroupModel
-from j4u_api.database.models import User as UserModel
+import j4u_api.database.models as models
 
 
 class User(SQLAlchemyObjectType):
     class Meta:
-        model = UserModel
+        model = models.User
         exclude_fields = ("password_hash",)
 
 
 class Feature(SQLAlchemyObjectType):
     class Meta:
-        model = FeatureModel
+        model = models.Feature
 
 
 class Group(SQLAlchemyObjectType):
     class Meta:
-        model = GroupModel
+        model = models.Group
+
+
+class UICongif(SQLAlchemyObjectType):
+    class Meta:
+        model = models.UIConfig
 
 
 class SignupUrl(graphene.ObjectType):
@@ -105,6 +108,7 @@ class JobRoomDescription(graphene.ObjectType):
 class JobRoomPosition(graphene.ObjectType):
     id = graphene.ID(required=True)
     job_quantity = graphene.Int()
+    external_url = graphene.String()
     language = graphene.String()
     descriptions = graphene.List(JobRoomDescription)
     company = graphene.Field(JobRoomCompany)
