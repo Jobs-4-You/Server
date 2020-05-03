@@ -8,13 +8,18 @@ from j4u_api.utils.print import to_pretty_string
 class Config:
     # ;ode
     MODE = None
+
     # Email
     EMAIL_USER = None
     EMAIL_PW = None
+
     # App secrets
     APP_KEY = None
     SALT = None
     JWT_KEY = None
+
+    # Jobs config
+    GET_FEATURES_JOB_INTERVAL = None
 
     # Postgres
     POSTGRES_USER = None

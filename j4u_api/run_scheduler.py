@@ -47,7 +47,7 @@ def start_interval_jobs(scheduler):
         trigger="interval",
         id="get_features",
         replace_existing="true",
-        seconds=15,
+        seconds=int(config.GET_FEATURES_JOB_INTERVAL),
     )
 
 
@@ -86,13 +86,13 @@ if __name__ == "__main__":
     scheduler = BackgroundScheduler(
         jobstores=jobstores, executors=executors, job_defaults=job_defaults
     )
+    start_interval_jobs(scheduler)
     scheduler.start()
     protocol_config = {"allow_public_attrs": True}
     server = ThreadedServer(
         SchedulerService, port=12345, protocol_config=protocol_config
     )
 
-    start_interval_jobs(scheduler)
     try:
         server.start()
     except (KeyboardInterrupt, SystemExit):
