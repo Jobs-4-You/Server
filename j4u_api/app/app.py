@@ -52,7 +52,7 @@ def certificate():
         "firstName": content["firstName"],
         "lastName": content["lastName"],
         "birthDate": content["birthDate"],
-        "server": config.APP_URL,
+        "server": "webapp:3000",
         "today": date.today(),
         "timestamp": "timestamp",
     }
