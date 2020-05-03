@@ -44,7 +44,7 @@ app.add_url_rule(
 
 @app.route("/certificate", methods=["POST"])
 @cross_origin()  # allow all origins all methods.
-def certificate():
+def certificate()
     content = request.get_json()
     templateData = {
         "civilite": content["civilite"],
@@ -57,6 +57,7 @@ def certificate():
         "timestamp": "timestamp",
     }
     certificate = render_template("certificate.html", **templateData)
+    print(certificate)
     HTML(string=certificate).write_pdf("storage/000.pdf")
     return send_file(
         "../storage/000.pdf", as_attachment=True, mimetype="application/pdf"
