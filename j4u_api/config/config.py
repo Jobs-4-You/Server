@@ -34,6 +34,7 @@ class Config:
     # App
     URL = None
     APP_URL = None
+    APP_DOCKER_URL = None
     HOST = None
     PORT = None
 
