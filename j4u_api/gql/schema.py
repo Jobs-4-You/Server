@@ -33,6 +33,7 @@ class Query(graphene.ObjectType):
     recommendations = graphene.Field(
         types.RecommendationResult,
         old_job_isco08=graphene.Int(required=True),
+        old_job_title=graphene.String(required=True),
         alpha=graphene.Float(required=True),
         beta=graphene.Float(required=True),
         resolver=resolvers.resolve_recommendations,
