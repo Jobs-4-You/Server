@@ -35,6 +35,22 @@ def get_features_and_send_emails():
             )
 
 
+def start_interval_jobs(scheduler):
+    print("Start interval jobs")
+    try:
+        scheduler.remove_job("get_features")
+        print("get_features job removed")
+    except Exception as err:
+        print(err)
+    job = scheduler.add_job(
+        get_features_and_send_emails,
+        trigger="interval",
+        id="get_features",
+        replace_existing="true",
+        seconds=15,
+    )
+
+
 class SchedulerService(rpyc.Service):
     def exposed_add_job(self, func, *args, **kwargs):
         return scheduler.add_job(func, *args, **kwargs)
@@ -75,6 +91,8 @@ if __name__ == "__main__":
     server = ThreadedServer(
         SchedulerService, port=12345, protocol_config=protocol_config
     )
+
+    start_interval_jobs(scheduler)
     try:
         server.start()
     except (KeyboardInterrupt, SystemExit):

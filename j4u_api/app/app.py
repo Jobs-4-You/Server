@@ -1,6 +1,9 @@
-from flask import Flask
-from flask_cors import CORS
+from datetime import date
+
+from flask import Flask, render_template, request, send_file
+from flask_cors import CORS, cross_origin
 from flask_graphql import GraphQLView
+from weasyprint import HTML
 
 from config import config
 from database import db_session
@@ -37,6 +40,27 @@ app.add_url_rule(
         "graphql", schema=schema, graphiql=True, middleware=[auth_middleware]
     ),
 )
+
+
+@app.route("/certificate", methods=["POST"])
+@cross_origin()  # allow all origins all methods.
+def certificate():
+    content = request.get_json()
+    templateData = {
+        "civilite": content["civilite"],
+        "jobTitle": content["jobTitle"],
+        "firstName": content["firstName"],
+        "lastName": content["lastName"],
+        "birthDate": content["birthDate"],
+        "server": config.APP_URL,
+        "today": date.today(),
+        "timestamp": "timestamp",
+    }
+    certificate = render_template("certificate.html", **templateData)
+    HTML(string=certificate).write_pdf("storage/000.pdf")
+    return send_file(
+        "../storage/000.pdf", as_attachment=True, mimetype="application/pdf"
+    )
 
 
 @app.teardown_appcontext
