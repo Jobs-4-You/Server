@@ -1,5 +1,6 @@
 import graphene
 
+from j4u_api.config import config
 from j4u_api.database.models import User as UserModel
 from j4u_api.errors.auth_errors import InvalidPassword, UserNotFound
 from j4u_api.utils.token import create_auth_token
@@ -20,5 +21,5 @@ class Auth(graphene.Mutation):
         if not user.check_password(password):
             raise InvalidPassword(email)
 
-        access_token = create_auth_token(user.id)
+        access_token = create_auth_token(user.id, int(config.AUTH_TOKEN_EXPIRATION))
         return Auth(access_token=access_token, refresh_token="refresh")

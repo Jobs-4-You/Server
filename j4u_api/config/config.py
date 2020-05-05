@@ -17,6 +17,7 @@ class Config:
     APP_KEY = None
     SALT = None
     JWT_KEY = None
+    AUTH_TOKEN_EXPIRATION = None
 
     # Jobs config
     GET_FEATURES_JOB_INTERVAL = None
