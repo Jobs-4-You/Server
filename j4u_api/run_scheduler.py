@@ -19,8 +19,13 @@ def get_features_and_send_emails():
                 template="export-done",
                 kwargs_list=kwargs_list,
             )
+    return len(users)
 
 
 while True:
-    get_features()
+    try:
+        n_updated = get_features()
+        print(f"{n_updated} users updated")
+    except Exception as err:
+        print(err)
     time.sleep(15)
