@@ -1,0 +1,119 @@
+{"asctime": "2020-05-07 21:35:00,062", "name": "j4u_api.utils.func", "levelname": "ERROR", "message": "ajiolo"}
+{"asctime": "2020-05-07 21:38:19,357", "name": "timeit", "levelname": "INFO", "message": "test"}
+{"asctime": "2020-05-07 21:38:43,146", "name": "timeit", "levelname": "INFO", "message": "test"}
+{"asctime": "2020-05-07 21:39:04,676", "name": "timeit", "levelname": "INFO", "message": "test"}
+{"asctime": "2020-05-07 21:39:06,501", "name": "timeit", "levelname": "INFO", "message": "Execution time of get_features: 1.824677", "f_name": "get_features", "exec_time": 1.8246772289276123}
+{"asctime": "2020-05-07 21:39:19,116", "name": "timeit", "levelname": "INFO", "message": "Execution time of get_features: 1.276837", "f_name": "get_features", "exec_time": 1.2768373489379883}
+{"asctime": "2020-05-07 21:40:20,258", "name": "j4u_api.utils.func", "levelname": "INFO", "message": "Execution time of get_features: 2.647498", "f_name": "get_features", "exec_time": 2.6474978923797607}
+{"asctime": "2020-05-07 22:26:11,707", "name": "j4u_api.utils.func.get_features", "levelname": "INFO", "message": "Execution time 2.500581", "exec_time": 2.5005807876586914}
+{"asctime": "2020-05-07 22:26:41,704", "name": "j4u_api.qualtrics.get_features.get_features", "levelname": "INFO", "message": "Execution time 2.437768", "exec_time": 2.4377682209014893}
+{"asctime": "2020-05-07 22:31:09,516", "name": "root", "levelname": "INFO", "message": "Execution time of j4u_api.qualtrics.get_features.get_features: 2.579864", "func": "j4u_api.qualtrics.get_features.get_features", "exec_time": 2.579864025115967}
+{"asctime": "2020-05-07 22:31:27,045", "name": "root", "levelname": "INFO", "message": "Execution time of j4u_api.qualtrics.get_features.get_features: 2.517761", "func": "j4u_api.qualtrics.get_features.get_features", "exec_time": 2.51776123046875}
+{"asctime": "2020-05-07 22:31:44,581", "name": "root", "levelname": "INFO", "message": "Execution time of j4u_api.qualtrics.get_features.get_features: 2.532194", "func": "j4u_api.qualtrics.get_features.get_features", "exec_time": 2.5321943759918213}
+{"asctime": "2020-05-07 22:42:57,581", "name": "root", "levelname": "INFO", "message": "Execution time of j4u_api.qualtrics.get_features.get_features: 2.253427", "func": "j4u_api.qualtrics.get_features.get_features", "exec_time": 2.2534265518188477}
+{"asctime": "2020-05-07 22:43:15,161", "name": "root", "levelname": "INFO", "message": "Execution time of j4u_api.qualtrics.get_features.get_features: 2.572216", "func": "j4u_api.qualtrics.get_features.get_features", "exec_time": 2.5722157955169678}
+{"asctime": "2020-05-07 22:53:30,547", "name": "root", "levelname": "INFO", "message": "Execution time of j4u_api.qualtrics.get_features.get_features: 0.888141", "func": "j4u_api.qualtrics.get_features.get_features", "exec_time": 0.888141393661499}
+{"asctime": "2020-05-07 22:54:32,766", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "Starting new HTTPS connection (1): eu.qualtrics.com:443"}
+{"asctime": "2020-05-07 22:54:33,162", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "https://eu.qualtrics.com:443 \"GET /API/v3/mailinglists HTTP/1.1\" 200 1099"}
+{"asctime": "2020-05-07 22:58:45,948", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "Starting new HTTPS connection (1): eu.qualtrics.com:443"}
+{"asctime": "2020-05-07 22:58:46,539", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "https://eu.qualtrics.com:443 \"GET /API/v3/mailinglists HTTP/1.1\" 200 1099"}
+{"asctime": "2020-05-07 22:59:29,139", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "Starting new HTTPS connection (1): eu.qualtrics.com:443"}
+{"asctime": "2020-05-07 22:59:29,654", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "https://eu.qualtrics.com:443 \"GET /API/v3/mailinglists HTTP/1.1\" 200 1099"}
+{"asctime": "2020-05-07 22:59:41,530", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "Starting new HTTPS connection (1): eu.qualtrics.com:443"}
+{"asctime": "2020-05-07 22:59:42,045", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "https://eu.qualtrics.com:443 \"GET /API/v3/mailinglists HTTP/1.1\" 200 1097"}
+{"asctime": "2020-05-07 23:00:20,014", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "Starting new HTTPS connection (1): eu.qualtrics.com:443"}
+{"asctime": "2020-05-07 23:00:20,447", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "https://eu.qualtrics.com:443 \"GET /API/v3/mailinglists HTTP/1.1\" 200 1099"}
+{"asctime": "2020-05-07 23:00:35,214", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "Starting new HTTPS connection (1): eu.qualtrics.com:443"}
+{"asctime": "2020-05-07 23:00:35,632", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "https://eu.qualtrics.com:443 \"GET /API/v3/mailinglists HTTP/1.1\" 200 1099"}
+{"asctime": "2020-05-07 23:01:15,123", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "Starting new HTTPS connection (1): eu.qualtrics.com:443"}
+{"asctime": "2020-05-07 23:01:15,740", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "https://eu.qualtrics.com:443 \"GET /API/v3/mailinglists HTTP/1.1\" 200 1099"}
+{"asctime": "2020-05-07 23:01:39,051", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "Starting new HTTPS connection (1): eu.qualtrics.com:443"}
+{"asctime": "2020-05-07 23:01:39,602", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "https://eu.qualtrics.com:443 \"GET /API/v3/mailinglists HTTP/1.1\" 200 1099"}
+{"asctime": "2020-05-07 23:01:47,241", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "Starting new HTTPS connection (1): eu.qualtrics.com:443"}
+{"asctime": "2020-05-07 23:01:47,740", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "https://eu.qualtrics.com:443 \"GET /API/v3/mailinglists HTTP/1.1\" 200 1099"}
+{"asctime": "2020-05-07 23:04:38,687", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "Starting new HTTPS connection (1): eu.qualtrics.com:443"}
+{"asctime": "2020-05-07 23:04:39,280", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "https://eu.qualtrics.com:443 \"GET /API/v3/mailinglists HTTP/1.1\" 200 1099"}
+{"asctime": "2020-05-07 23:04:55,300", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "Starting new HTTPS connection (1): eu.qualtrics.com:443"}
+{"asctime": "2020-05-07 23:04:55,708", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "https://eu.qualtrics.com:443 \"GET /API/v3/mailinglists HTTP/1.1\" 200 1099"}
+{"asctime": "2020-05-07 23:04:55,718", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "Starting new HTTPS connection (1): eu.qualtrics.com:443"}
+{"asctime": "2020-05-07 23:04:56,162", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "https://eu.qualtrics.com:443 \"GET /API/v3/mailinglists/ML_2oxYNK0cksdGSxf HTTP/1.1\" 200 231"}
+{"asctime": "2020-05-07 23:05:23,729", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "Starting new HTTPS connection (1): eu.qualtrics.com:443"}
+{"asctime": "2020-05-07 23:05:24,271", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "https://eu.qualtrics.com:443 \"GET /API/v3/mailinglists HTTP/1.1\" 200 1099"}
+{"asctime": "2020-05-07 23:05:24,275", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "Starting new HTTPS connection (1): eu.qualtrics.com:443"}
+{"asctime": "2020-05-07 23:05:24,783", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "https://eu.qualtrics.com:443 \"GET /API/v3/mailinglists/ML_2oxYNK0cksdGSxf HTTP/1.1\" 200 231"}
+{"asctime": "2020-05-07 23:06:47,406", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "Starting new HTTPS connection (1): eu.qualtrics.com:443"}
+{"asctime": "2020-05-07 23:06:47,935", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "https://eu.qualtrics.com:443 \"GET /API/v3/mailinglists HTTP/1.1\" 200 1099"}
+{"asctime": "2020-05-07 23:06:47,945", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "Starting new HTTPS connection (1): eu.qualtrics.com:443"}
+{"asctime": "2020-05-07 23:06:48,548", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "https://eu.qualtrics.com:443 \"GET /API/v3/mailinglists/ML_2oxYNK0cksdGSxf HTTP/1.1\" 200 231"}
+{"asctime": "2020-05-07 23:08:59,436", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "Starting new HTTPS connection (1): eu.qualtrics.com:443"}
+{"asctime": "2020-05-07 23:09:00,037", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "https://eu.qualtrics.com:443 \"GET /API/v3/mailinglists HTTP/1.1\" 200 1099"}
+{"asctime": "2020-05-07 23:09:00,049", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "Starting new HTTPS connection (1): eu.qualtrics.com:443"}
+{"asctime": "2020-05-07 23:09:00,408", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "https://eu.qualtrics.com:443 \"GET /API/v3/mailinglists/ML_2oxYNK0cksdGSxf/contacts HTTP/1.1\" 200 343"}
+{"asctime": "2020-05-07 23:09:17,528", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "Starting new HTTPS connection (1): eu.qualtrics.com:443"}
+{"asctime": "2020-05-07 23:09:17,942", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "https://eu.qualtrics.com:443 \"GET /API/v3/mailinglists HTTP/1.1\" 200 1099"}
+{"asctime": "2020-05-07 23:09:17,946", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "Starting new HTTPS connection (1): eu.qualtrics.com:443"}
+{"asctime": "2020-05-07 23:09:18,273", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "https://eu.qualtrics.com:443 \"GET /API/v3/mailinglists/ML_2oxYNK0cksdGSxf/contacts HTTP/1.1\" 200 343"}
+{"asctime": "2020-05-07 23:15:09,607", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "Starting new HTTPS connection (1): eu.qualtrics.com:443"}
+{"asctime": "2020-05-07 23:15:10,183", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "https://eu.qualtrics.com:443 \"GET /API/v3/mailinglists HTTP/1.1\" 200 1099"}
+{"asctime": "2020-05-07 23:15:10,193", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "Starting new HTTPS connection (1): eu.qualtrics.com:443"}
+{"asctime": "2020-05-07 23:15:10,546", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "https://eu.qualtrics.com:443 \"GET /API/v3/mailinglists/ML_2oxYNK0cksdGSxf/contacts HTTP/1.1\" 200 343"}
+{"asctime": "2020-05-07 23:21:59,115", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "Starting new HTTPS connection (1): eu.qualtrics.com:443"}
+{"asctime": "2020-05-07 23:21:59,979", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "https://eu.qualtrics.com:443 \"GET /API/v3/mailinglists HTTP/1.1\" 200 1099"}
+{"asctime": "2020-05-07 23:21:59,991", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "Starting new HTTPS connection (1): eu.qualtrics.com:443"}
+{"asctime": "2020-05-07 23:22:01,183", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "https://eu.qualtrics.com:443 \"GET /API/v3/mailinglists HTTP/1.1\" 200 1099"}
+{"asctime": "2020-05-07 23:22:01,195", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "Starting new HTTPS connection (1): eu.qualtrics.com:443"}
+{"asctime": "2020-05-07 23:22:01,520", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "https://eu.qualtrics.com:443 \"GET /API/v3/mailinglists/ML_2oxYNK0cksdGSxf/contacts HTTP/1.1\" 200 339"}
+{"asctime": "2020-05-07 23:22:28,740", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "Starting new HTTPS connection (1): eu.qualtrics.com:443"}
+{"asctime": "2020-05-07 23:22:29,116", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "https://eu.qualtrics.com:443 \"GET /API/v3/mailinglists HTTP/1.1\" 200 1099"}
+{"asctime": "2020-05-07 23:22:29,127", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "Starting new HTTPS connection (1): eu.qualtrics.com:443"}
+{"asctime": "2020-05-07 23:22:29,580", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "https://eu.qualtrics.com:443 \"GET /API/v3/mailinglists HTTP/1.1\" 200 1099"}
+{"asctime": "2020-05-07 23:22:29,591", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "Starting new HTTPS connection (1): eu.qualtrics.com:443"}
+{"asctime": "2020-05-07 23:22:29,952", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "https://eu.qualtrics.com:443 \"GET /API/v3/mailinglists/ML_2oxYNK0cksdGSxf/contacts HTTP/1.1\" 200 339"}
+{"asctime": "2020-05-07 23:22:59,752", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "Starting new HTTPS connection (1): eu.qualtrics.com:443"}
+{"asctime": "2020-05-07 23:23:00,178", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "https://eu.qualtrics.com:443 \"GET /API/v3/mailinglists HTTP/1.1\" 200 1099"}
+{"asctime": "2020-05-07 23:23:00,190", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "Starting new HTTPS connection (1): eu.qualtrics.com:443"}
+{"asctime": "2020-05-07 23:23:00,600", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "https://eu.qualtrics.com:443 \"GET /API/v3/mailinglists HTTP/1.1\" 200 1099"}
+{"asctime": "2020-05-07 23:23:00,605", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "Starting new HTTPS connection (1): eu.qualtrics.com:443"}
+{"asctime": "2020-05-07 23:23:00,952", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "https://eu.qualtrics.com:443 \"GET /API/v3/mailinglists/ML_2oxYNK0cksdGSxf/contacts HTTP/1.1\" 200 339"}
+{"asctime": "2020-05-07 23:23:25,193", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "Starting new HTTPS connection (1): eu.qualtrics.com:443"}
+{"asctime": "2020-05-07 23:23:25,577", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "https://eu.qualtrics.com:443 \"GET /API/v3/mailinglists HTTP/1.1\" 200 1099"}
+{"asctime": "2020-05-07 23:23:25,582", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "Starting new HTTPS connection (1): eu.qualtrics.com:443"}
+{"asctime": "2020-05-07 23:23:25,938", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "https://eu.qualtrics.com:443 \"GET /API/v3/mailinglists HTTP/1.1\" 200 1099"}
+{"asctime": "2020-05-07 23:23:25,946", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "Starting new HTTPS connection (1): eu.qualtrics.com:443"}
+{"asctime": "2020-05-07 23:23:26,282", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "https://eu.qualtrics.com:443 \"GET /API/v3/mailinglists/ML_2oxYNK0cksdGSxf/contacts HTTP/1.1\" 200 339"}
+{"asctime": "2020-05-07 23:24:05,915", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "Starting new HTTPS connection (1): eu.qualtrics.com:443"}
+{"asctime": "2020-05-07 23:24:06,391", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "https://eu.qualtrics.com:443 \"GET /API/v3/mailinglists HTTP/1.1\" 200 1099"}
+{"asctime": "2020-05-07 23:24:06,404", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "Starting new HTTPS connection (1): eu.qualtrics.com:443"}
+{"asctime": "2020-05-07 23:24:06,851", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "https://eu.qualtrics.com:443 \"GET /API/v3/mailinglists HTTP/1.1\" 200 1099"}
+{"asctime": "2020-05-07 23:24:06,863", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "Starting new HTTPS connection (1): eu.qualtrics.com:443"}
+{"asctime": "2020-05-07 23:24:07,222", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "https://eu.qualtrics.com:443 \"GET /API/v3/mailinglists/ML_2oxYNK0cksdGSxf/contacts HTTP/1.1\" 200 339"}
+{"asctime": "2020-05-07 23:26:38,328", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "Starting new HTTPS connection (1): eu.qualtrics.com:443"}
+{"asctime": "2020-05-07 23:26:38,802", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "https://eu.qualtrics.com:443 \"GET /API/v3/mailinglists HTTP/1.1\" 200 1099"}
+{"asctime": "2020-05-07 23:26:38,806", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "Starting new HTTPS connection (1): eu.qualtrics.com:443"}
+{"asctime": "2020-05-07 23:26:39,208", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "https://eu.qualtrics.com:443 \"GET /API/v3/mailinglists HTTP/1.1\" 200 1099"}
+{"asctime": "2020-05-07 23:26:39,212", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "Starting new HTTPS connection (1): eu.qualtrics.com:443"}
+{"asctime": "2020-05-07 23:26:39,550", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "https://eu.qualtrics.com:443 \"GET /API/v3/mailinglists/ML_2oxYNK0cksdGSxf/contacts HTTP/1.1\" 200 339"}
+{"asctime": "2020-05-07 23:26:53,980", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "Starting new HTTPS connection (1): eu.qualtrics.com:443"}
+{"asctime": "2020-05-07 23:26:54,457", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "https://eu.qualtrics.com:443 \"GET /API/v3/mailinglists HTTP/1.1\" 200 1099"}
+{"asctime": "2020-05-07 23:26:54,468", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "Starting new HTTPS connection (1): eu.qualtrics.com:443"}
+{"asctime": "2020-05-07 23:26:54,855", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "https://eu.qualtrics.com:443 \"GET /API/v3/mailinglists HTTP/1.1\" 200 1099"}
+{"asctime": "2020-05-07 23:26:54,869", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "Starting new HTTPS connection (1): eu.qualtrics.com:443"}
+{"asctime": "2020-05-07 23:26:55,232", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "https://eu.qualtrics.com:443 \"GET /API/v3/mailinglists/ML_2oxYNK0cksdGSxf/contacts HTTP/1.1\" 200 339"}
+{"asctime": "2020-05-07 23:26:55,242", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "Starting new HTTPS connection (1): eu.qualtrics.com:443"}
+{"asctime": "2020-05-07 23:26:55,694", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "https://eu.qualtrics.com:443 \"POST /API/v3/mailinglists/ML_2oxYNK0cksdGSxf/contacts HTTP/1.1\" 200 124"}
+{"asctime": "2020-05-08 00:03:02,199", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "Starting new HTTPS connection (1): eu.qualtrics.com:443"}
+{"asctime": "2020-05-08 00:03:02,867", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "https://eu.qualtrics.com:443 \"GET /API/v3/surveys HTTP/1.1\" 200 2254"}
+{"asctime": "2020-05-08 00:03:14,773", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "Starting new HTTPS connection (1): eu.qualtrics.com:443"}
+{"asctime": "2020-05-08 00:03:15,320", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "https://eu.qualtrics.com:443 \"GET /API/v3/surveys HTTP/1.1\" 200 2254"}
+{"asctime": "2020-05-08 00:03:29,715", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "Starting new HTTPS connection (1): eu.qualtrics.com:443"}
+{"asctime": "2020-05-08 00:03:30,407", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "https://eu.qualtrics.com:443 \"GET /API/v3/surveys HTTP/1.1\" 200 2254"}
+{"asctime": "2020-05-08 00:03:42,451", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "Starting new HTTPS connection (1): eu.qualtrics.com:443"}
+{"asctime": "2020-05-08 00:03:43,143", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "https://eu.qualtrics.com:443 \"GET /API/v3/surveys HTTP/1.1\" 200 2254"}
+{"asctime": "2020-05-08 00:04:23,943", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "Starting new HTTPS connection (1): eu.qualtrics.com:443"}
+{"asctime": "2020-05-08 00:04:24,480", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "https://eu.qualtrics.com:443 \"GET /API/v3/surveys HTTP/1.1\" 200 2254"}
+{"asctime": "2020-05-08 00:04:24,491", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "Starting new HTTPS connection (1): eu.qualtrics.com:443"}
+{"asctime": "2020-05-08 00:04:24,926", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "https://eu.qualtrics.com:443 \"GET /API/v3/distributions?surveyId=SV_09w9Qx3TAjaNDW5 HTTP/1.1\" 200 126"}
+{"asctime": "2020-05-08 00:04:41,643", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "Starting new HTTPS connection (1): eu.qualtrics.com:443"}
+{"asctime": "2020-05-08 00:04:42,179", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "https://eu.qualtrics.com:443 \"GET /API/v3/surveys HTTP/1.1\" 200 2253"}
+{"asctime": "2020-05-08 00:04:42,188", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "Starting new HTTPS connection (1): eu.qualtrics.com:443"}
+{"asctime": "2020-05-08 00:04:42,635", "name": "urllib3.connectionpool", "levelname": "DEBUG", "message": "https://eu.qualtrics.com:443 \"GET /API/v3/distributions?surveyId=SV_09w9Qx3TAjaNDW5 HTTP/1.1\" 200 126"}

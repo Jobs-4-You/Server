@@ -6,8 +6,8 @@ baseline_ids = {
     "CONT": "SV_9LWr3TrjbpNEdMh",
     "J4U": "SV_eu2KVQoRYyVFsod",
     "J4U+COG": "SV_cVfzu7FqlpU53yl",
-    "NJS": "SV_cVfzu7FqlpU53yl",
-    "J4U+NJS": "SV_cVfzu7FqlpU53yl",
+    "NJS": "SV_esuuql0UxehGKfX",
+    "J4U+NJS": "SV_3lAWvHkJlxiWPBz",
 }
 
 cruiser_ids = {

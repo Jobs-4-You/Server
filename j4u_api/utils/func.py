@@ -1,3 +1,9 @@
+import functools
+import time
+
+from j4u_api.utils.logging import get_logger
+
+
 def _get_path(d, path):
     def f(curr_obj, parts):
         if len(parts) > 1:
@@ -35,3 +41,30 @@ def pick_rename(d, paths):
         _set_path(res, to_path, value)
 
     return res
+
+
+def async_timeit(caller_module):
+    def _decorate(function):
+        @functools.wraps(function)
+        async def wrapped_function(*args, **kwargs):
+            start = time.time()
+            try:
+                res = await function(*args, **kwargs)
+                return res
+            except Exception as err:
+                raise err
+            finally:
+                end = time.time()
+                extra = {
+                    "func": f"{function.__module__}.{function.__name__}",
+                    "exec_time": end - start,
+                }
+                logger = .get_logger(caller_module)
+                logger.info("Execution time of %s: %f", *extra.values(), extra=extra)
+
+        return wrapped_function
+
+    return _decorate
+
+
+    return _decorate

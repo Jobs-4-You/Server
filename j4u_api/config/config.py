@@ -1,4 +1,5 @@
 import os
+import pathlib
 
 from dotenv import load_dotenv
 
@@ -6,7 +7,7 @@ from j4u_api.utils.print import to_pretty_string
 
 
 class Config:
-    # ;ode
+    # Mode
     MODE = None
 
     # Email
@@ -53,6 +54,13 @@ class Config:
         ]
         for k in keys:
             setattr(self, k, os.environ[k])
+        # Root path
+        self.ROOT_DIR = os.path.abspath(
+            f"{pathlib.Path(__file__).parent.absolute()}/.."
+        )
+        self.LOGGING_CONF_PATH = os.path.abspath(
+            os.path.join(self.ROOT_DIR, "loggin.ini")
+        )
 
     def __repr__(self):
         res = {}
@@ -64,10 +72,12 @@ class Config:
     @property
     def DB_URL(self):
         return (
-            f"postgres://{self.POSTGRES_USER}:{self.POSTGRES_PW}@"
+            f"postgresql://{self.POSTGRES_USER}:{self.POSTGRES_PW}@"
             f"{self.POSTGRES_IP}/{self.POSTGRES_DB}"
         )
 
 
-load_dotenv("../.dotenv")
+current_folder = pathlib.Path(__file__).parent.absolute()
+dotenv_path = f"{current_folder}/../../.dotenv"
+load_dotenv(dotenv_path)
 config = Config()

@@ -124,3 +124,12 @@ class User(Base):
     def baseline_link(self):
         base_url = "https://fpse.qualtrics.com/jfe/form"
         return f"{base_url}/{self.group.baseline_id}?={self.survey_id}"
+
+
+class DatetimeJob(Base):
+    __tablename__ = "datetime_jobs"
+    id = S.Column(S.Integer, primary_key=True)
+    name = S.Column(S.String(64), nullable=False)
+    state = S.Column(S.String(64), nullable=False, default="PENDING")
+    action = S.Column(S.String(64), nullable=False)
+    params = S.Column(S.String(64), nullable=False)

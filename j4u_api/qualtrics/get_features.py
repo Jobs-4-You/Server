@@ -9,6 +9,7 @@ import pandas as pd
 
 from j4u_api.database import db_session
 from j4u_api.database.models import Feature, FeatureConfig, Group, User
+from j4u_api.utils.logging import get_logger
 
 from .qualtrics import qual_client
 
@@ -160,13 +161,13 @@ async def main(groups):
     return await gather_dict(futures_dict)
 
 
-def get_features():
+async def get_features():
     print("Importing Qualtrics data ...")
     groups = Group.query.all()
 
     configs = FeatureConfig.query.all()
 
-    surveys_data = asyncio.run(main(groups))
+    surveys_data = await main(groups)
 
     df_final = get_final_df(surveys_data, configs)
 
