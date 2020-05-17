@@ -5,6 +5,7 @@ import numpy as np
 import pandas as pd
 from scipy.spatial.distance import pdist, squareform
 
+from j4u_api.config import config
 from j4u_api.utils.data import get_clean_jobs_df
 
 warnings.filterwarnings("ignore")
@@ -12,7 +13,7 @@ warnings.filterwarnings("ignore")
 
 class Engine:
     def __init__(self):
-        data = pd.read_csv("storage/onetXmauro2.csv", encoding="latin1")
+        data = pd.read_csv(config.ONET_CSV_PATH, encoding="latin1")
         codes = set(data["isco08"].values)
         code_to_title = {
             c: data[data["isco08"] == c]["TitreFR"].values[0] for c in codes

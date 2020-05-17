@@ -24,3 +24,8 @@ class GroupInput(graphene.InputObjectType):
     baseline_id = graphene.ID(required=True)
     cruiser_id = graphene.ID(required=True)
     ui_config = UIConfigInput(required=True)
+
+
+class EventInput(graphene.InputObjectType):
+    type = graphene.String(required=True)
+    payload = graphene.JSONString()

@@ -1,5 +1,7 @@
 import os
 
+from elasticsearch_dsl import Index
+
 from j4u_api.database import engine
 
 
@@ -10,6 +12,15 @@ def reset_db():
 
 def reset_migrations():
     os.system("rm ./alembic/versions/* -rf")
+
+
+def reset_elastic_db():
+    try:
+        Index(name="jobs").delete()
+        Index(name="events").delete()
+        print("INDEXES DELETED")
+    except Exception as err:
+        print("NO INDEX DELETED")
 
 
 def migrate():

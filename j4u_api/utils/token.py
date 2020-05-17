@@ -2,7 +2,7 @@ from datetime import datetime, timedelta
 
 import jwt
 
-from config import config
+from j4u_api.config import config
 
 
 def extract_from_token(token):

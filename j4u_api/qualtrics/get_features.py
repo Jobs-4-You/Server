@@ -9,7 +9,6 @@ import pandas as pd
 
 from j4u_api.database import db_session
 from j4u_api.database.models import Feature, FeatureConfig, Group, User
-from j4u_api.utils.logging import get_logger
 
 from .qualtrics import qual_client
 

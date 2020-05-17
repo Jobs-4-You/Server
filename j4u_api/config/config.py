@@ -20,14 +20,19 @@ class Config:
     JWT_KEY = None
     AUTH_TOKEN_EXPIRATION = None
 
-    # Jobs config
+    # Config
     GET_FEATURES_JOB_INTERVAL = None
+    HEARTBEAT_MAX_INTERVAL = None
 
     # Postgres
     POSTGRES_USER = None
     POSTGRES_PW = None
     POSTGRES_DB = None
     POSTGRES_IP = None
+
+    # Elastic
+    ELASTIC_PW = None
+    ELASTIC_IP = None
 
     # Qualtrics
     QUALTRICS_TOKEN = None
@@ -54,13 +59,6 @@ class Config:
         ]
         for k in keys:
             setattr(self, k, os.environ[k])
-        # Root path
-        self.ROOT_DIR = os.path.abspath(
-            f"{pathlib.Path(__file__).parent.absolute()}/.."
-        )
-        self.LOGGING_CONF_PATH = os.path.abspath(
-            os.path.join(self.ROOT_DIR, "loggin.ini")
-        )
 
     def __repr__(self):
         res = {}
@@ -75,6 +73,30 @@ class Config:
             f"postgresql://{self.POSTGRES_USER}:{self.POSTGRES_PW}@"
             f"{self.POSTGRES_IP}/{self.POSTGRES_DB}"
         )
+
+    @property
+    def ELASTIC_URL(self):
+        return f"elastic:{self.ELASTIC_PW}@{self.ELASTIC_IP}"
+
+    @property
+    def ROOT_DIR(self):
+        return os.path.abspath(f"{pathlib.Path(__file__).parent.absolute()}/..")
+
+    @property
+    def LOG_FILE(self):
+        return os.path.abspath(os.path.join(self.ROOT_DIR, "storage/app-logs.log"))
+
+    @property
+    def CERT_TEMP_PATH(self):
+        return os.path.abspath(os.path.join(self.ROOT_DIR, "storage/certificates-temp"))
+
+    @property
+    def ONET_CSV_PATH(self):
+        return os.path.abspath(os.path.join(self.ROOT_DIR, "storage/onetXmauro2.csv"))
+
+    @property
+    def JOBS_JSON_PATH(self):
+        return os.path.abspath(os.path.join(self.ROOT_DIR, "storage/jobs.json"))
 
 
 current_folder = pathlib.Path(__file__).parent.absolute()

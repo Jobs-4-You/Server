@@ -52,10 +52,10 @@ class FeatureConfig(Base):
 class Feature(Base):
     __tablename__ = "features"
     id = S.Column(S.Integer, primary_key=True)
-    user_id = S.Column(S.Integer, S.ForeignKey("users.id"))
     feature_config_id = S.Column(S.Integer, S.ForeignKey("feature_configs.id"))
-    user = relationship("User", foreign_keys=[user_id])
     feature_config = relationship("FeatureConfig", foreign_keys=[feature_config_id])
+    user_id = S.Column(S.Integer, S.ForeignKey("users.id"))
+    user = relationship("User", foreign_keys=[user_id])
     value = S.Column(S.Float, nullable=False)
 
 

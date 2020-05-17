@@ -4,7 +4,8 @@ import click
 
 from j4u_api.config import config
 from j4u_api.database.seed import seed_testing
-from j4u_api.utils.db import migrate, reset_db, reset_migrations
+from j4u_api.elastic_db.seed import seed_elastic
+from j4u_api.utils.db import migrate, reset_db, reset_elastic_db, reset_migrations
 
 
 @click.group()
@@ -19,6 +20,8 @@ def fresh_start(seed_test):
     reset_db()
     reset_migrations()
     migrate()
+    reset_elastic_db()
+    seed_elastic()
     if seed_test:
         seed_testing()
 

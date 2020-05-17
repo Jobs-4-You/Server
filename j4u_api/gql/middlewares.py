@@ -2,7 +2,7 @@ import jwt
 
 from j4u_api.database.models import User
 from j4u_api.errors.token_errors import SessionExpired
-from utils.token import extract_from_token
+from j4u_api.utils.token import extract_from_token
 
 
 def auth_middleware(next, root, info, **args):

@@ -1,7 +1,7 @@
 import functools
 import time
 
-from j4u_api.utils.logging import get_logger
+from j4u_api.utils.logging import logger
 
 
 def _get_path(d, path):
@@ -55,16 +55,17 @@ def async_timeit(caller_module):
                 raise err
             finally:
                 end = time.time()
-                extra = {
-                    "func": f"{function.__module__}.{function.__name__}",
-                    "exec_time": end - start,
-                }
-                logger = .get_logger(caller_module)
-                logger.info("Execution time of %s: %f", *extra.values(), extra=extra)
+                exec_time = end - start
+                logger.info(
+                    caller_module,
+                    function,
+                    "Execution time: %f",
+                    exec_time,
+                    extra={"exec_time": exec_time},
+                )
 
         return wrapped_function
 
     return _decorate
-
 
     return _decorate

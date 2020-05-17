@@ -1,4 +1,5 @@
 import humps
+from elasticsearch_dsl import Q, Search
 
 import j4u_api.database.models as models
 import j4u_api.gql.types as types
@@ -6,7 +7,6 @@ from j4u_api.config import config
 from j4u_api.database.connection import db_session
 from j4u_api.database.enums import RoleEnum
 from j4u_api.job_room import job_room_client
-from j4u_api.jobs_search import jobs_searcher
 from j4u_api.qualtrics import qual_client
 from j4u_api.recommendations import recom_engine
 from j4u_api.utils.auth import jwt_auth_required, roles_required
@@ -49,7 +49,25 @@ def resolve_all_surveys(parent, info):
 
 
 def resolve_job_search_hints(parent, info, query, limit=5):
-    res = jobs_searcher.search(query, limit)
+    # qs = [Q("fuzzy", title=q) for q in query.split()]
+    # query = qs.pop()
+    # for q in qs:
+    #    query = query | q
+    query = query.lower()
+    qq = " AND ".join([f"({x}*)" for x in query.split()])
+    print(qq)
+
+    query = Q("query_string", query=qq, fields=["title"])
+
+    s = Search(index="jobs").query(query)[:limit]
+    from j4u_api.utils.print import pretty_print
+
+    response = s.execute()
+    res = []
+    for hit in response:
+        meta = hit.meta
+        hit.id = meta.id
+        res.append(hit)
     return res
 
 

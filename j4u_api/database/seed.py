@@ -1,5 +1,7 @@
+from datetime import datetime
+
 from j4u_api.database import db_session, engine
-from j4u_api.database.models import Base, FeatureConfig, Group, UIConfig, User
+from j4u_api.database.models import Base, Feature, FeatureConfig, Group, UIConfig, User
 
 baseline_ids = {
     "COG": "SV_emNJjF8ZCQPAyA5",
@@ -150,6 +152,8 @@ def seed_testing():
     for x in features_configs:
         fc = FeatureConfig(**x)
         fcs.append(fc)
+    db_session.add_all(fcs)
+    db_session.flush()
 
     groups = []
     for (name, baseline_id), (_, cruiser_id) in zip(
@@ -186,6 +190,8 @@ def seed_testing():
         password="jdida",
         survey_id="12073231",
         verified=True,
+        form_done=True,
+        form_done_at=datetime.now(),
         group=groups[0],
     )
     ather = User(
@@ -199,11 +205,19 @@ def seed_testing():
         password="jdida",
         survey_id="46894124",
         verified=False,
+        form_done=False,
         group=groups[4],
     )
+    db_session.add_all([admin, other, ather])
+    db_session.flush()
+
+    other_user_features = []
+    for fc in fcs:
+        f = Feature(user_id=other.id, feature_config_id=fc.id, value=3)
+        other_user_features.append(f)
+
+    db_session.bulk_save_objects(other_user_features)
 
     db_session.add_all(groups)
-    db_session.add_all(fcs)
-    db_session.add_all([admin, other, ather])
     db_session.commit()
     print("Seeding done.")

@@ -45,6 +45,7 @@ class Mutation(graphene.ObjectType):
     create_user = mutations.CreateUser.Field()
     verify_user = mutations.VerifyUser.Field()
     update_group_config = mutations.UpdateGroupConfig.Field()
+    create_event = mutations.CreateEvent.Field()
 
 
 schema = graphene.Schema(query=Query, mutation=Mutation)

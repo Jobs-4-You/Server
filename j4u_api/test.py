@@ -1,11 +1,27 @@
-# import scheduler.client
-from j4u_api.qualtrics import qual_client
+from datetime import datetime
 
-# x = qual_client.create_contact(email="ather@test.com")
-a = qual_client.list_surveys()
-x = a[0]["id"]
-print(x)
+from elasticsearch_dsl import Search
 
-y = qual_client.list_distributions(x)
+from j4u_api.elastic_db import Event, es_session
 
-print(y)
+ev = Event(
+    timestamp=int(datetime.now().timestamp()),
+    ip="127.0.0.1",
+    type="LOG",
+    user_id=2,
+    ajio=4,
+)
+ev.save()
+
+
+s = Search(index="events").query("match_all")[:50]
+
+
+response = s.execute()
+
+print(dir(response))
+
+print(len(response))
+
+for hit in response:
+    print(dir(hit))

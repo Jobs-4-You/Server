@@ -1,8 +1,10 @@
 import pandas as pd
 
+from j4u_api.config import config
+
 
 def get_clean_jobs_df():
-    df = pd.read_json("storage/jobs.json")
+    df = pd.read_json(config.JOBS_JSON_PATH)
     df.columns = [x.lower() for x in df.columns]
     df = df.rename(columns={"iscotitle": "isco_title"})
     df = df.drop_duplicates()
