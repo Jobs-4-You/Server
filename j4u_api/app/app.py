@@ -50,24 +50,29 @@ app.add_url_rule(
 @app.route("/certificate", methods=["POST"])
 @cross_origin()  # allow all origins all methods.
 def certificate():
-    print("CERT----------------------------------")
-    content = request.get_json()
-    templateData = {
-        "civilite": content["civilite"],
-        "jobTitle": content["jobTitle"],
-        "firstName": content["firstName"],
-        "lastName": content["lastName"],
-        "birthDate": content["birthDate"],
-        "server": config.APP_DOCKER_URL,
-        "today": date.today(),
-        "timestamp": "timestamp",
-    }
-    certificate = render_template("certificate.html", **templateData)
-    uuid_name = f"{str(uuid.uuid4())}.pdf"
-    pdf_temp_path = os.path.join(config.CERT_TEMP_PATH, uuid_name)
-    HTML(string=certificate).write_pdf(pdf_temp_path)
-    print("----------------------------------")
-    return send_file(pdf_temp_path, as_attachment=True, mimetype="application/pdf")
+    try:
+        content = request.get_json()
+        templateData = {
+            "civilite": content["civilite"],
+            "jobTitle": content["jobTitle"],
+            "firstName": content["firstName"],
+            "lastName": content["lastName"],
+            "birthDate": content["birthDate"],
+            "server": config.APP_DOCKER_URL,
+            "today": date.today(),
+            "timestamp": "timestamp",
+        }
+        certificate = render_template("certificate.html", **templateData)
+        uuid_name = f"{str(uuid.uuid4())}.pdf"
+        pdf_temp_path = os.path.join(config.CERT_TEMP_PATH, uuid_name)
+        HTML(string=certificate).write_pdf(pdf_temp_path)
+        return send_file(pdf_temp_path, as_attachment=True, mimetype="application/pdf")
+    except Exception as err:
+        print(err)
+        print(err)
+        print(err)
+        print(err)
+        print(err)
 
 
 @app.teardown_appcontext
