@@ -2,6 +2,7 @@ import asyncio
 import logging.config
 import time
 
+from j4u_api.config import config
 from j4u_api.qualtrics.get_features import get_features
 from j4u_api.utils.func import async_timeit
 
@@ -51,7 +52,7 @@ class Scheduler:
 
     async def main(self):
         f = async_timeit(__name__)(get_features)
-        asyncio.create_task(interval_job(f, [], 15))
+        asyncio.create_task(interval_job(f, [], int(config.GET_FEATURES_JOB_INTERVAL)))
         while True:
             await asyncio.sleep(10)
         pass

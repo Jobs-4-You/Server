@@ -15,6 +15,7 @@ class UserInput(graphene.InputObjectType):
 
 class UIConfigInput(graphene.InputObjectType):
     search = graphene.Boolean(required=True)
+    recommendations = graphene.Boolean(required=True)
     alpha_fixed = graphene.Boolean(required=True)
     beta_fixed = graphene.Boolean(required=True)
 

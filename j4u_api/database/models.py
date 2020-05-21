@@ -65,6 +65,7 @@ class UIConfig(Base):
     group_id = S.Column(S.ForeignKey("groups.id"), nullable=False)
     group = relationship("Group", back_populates="ui_config")
     search = S.Column(S.Boolean, default=False)
+    recommendations = S.Column(S.Boolean, default=False)
     alpha_fixed = S.Column(S.Boolean, default=False)
     beta_fixed = S.Column(S.Boolean, default=False)
 

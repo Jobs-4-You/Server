@@ -1,3 +1,4 @@
+import random
 from datetime import datetime
 
 from j4u_api.database import db_session, engine
@@ -179,44 +180,35 @@ def seed_testing():
         verified=True,
         group=groups[2],
     )
-    other = User(
-        civilite="M",
-        role="USER",
-        first_name="other",
-        last_name="nimda",
-        birth_date="2019-01-01",
-        phone="0658062947",
-        email="user1@yopmail.com",
-        password="jdida",
-        survey_id="12073231",
-        verified=True,
-        form_done=True,
-        form_done_at=datetime.now(),
-        group=groups[0],
-    )
-    ather = User(
-        civilite="M",
-        role="USER",
-        first_name="ather",
-        last_name="nimda",
-        birth_date="2019-01-01",
-        phone="0658062949",
-        email="user2@yopmail.com",
-        password="jdida",
-        survey_id="46894124",
-        verified=False,
-        form_done=False,
-        group=groups[4],
-    )
-    db_session.add_all([admin, other, ather])
+
+    group_based_users = []
+    group_based_features = []
+    for group in groups:
+        user = User(
+            civilite="M",
+            role="USER",
+            first_name="John",
+            last_name="Doe",
+            birth_date="2000-01-01",
+            phone=str(random.randint(1e6, 1e7)),
+            email=f"{group.name.lower()}@yopmail.com",
+            password="jdida",
+            survey_id=str(random.randint(1e8, 1e9)),
+            verified=True,
+            form_done=True,
+            form_done_at=datetime.now(),
+            group=group,
+        )
+        db_session.add(user)
+        db_session.flush()
+        for fc in fcs:
+            f = Feature(user_id=user.id, feature_config_id=fc.id, value=3)
+            group_based_features.append(f)
+
+    db_session.add(admin)
+    db_session.add_all(group_based_users)
     db_session.flush()
-
-    other_user_features = []
-    for fc in fcs:
-        f = Feature(user_id=other.id, feature_config_id=fc.id, value=3)
-        other_user_features.append(f)
-
-    db_session.bulk_save_objects(other_user_features)
+    db_session.bulk_save_objects(group_based_features)
 
     db_session.add_all(groups)
     db_session.commit()
