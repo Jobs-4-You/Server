@@ -1,6 +1,8 @@
 .vscode
 .env
 .dotenv*
+j4u_api/alembic/versions/*
+!j4u_api/alembic/versions/.gitkeep
 
 # Created by https://www.gitignore.io/api/flask,python,visualstudiocode
 # Edit at https://www.gitignore.io/?templates=flask,python,visualstudiocode
