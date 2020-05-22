@@ -50,7 +50,7 @@ class CreateUser(graphene.Mutation):
 
         user_dict = new_user.to_dict()
         del user_dict["password_hash"]
-        return CreateUser(user=User(**user_dict))
+        return CreateUser(user=user_dict)
 
 
 class VerifyUser(graphene.Mutation):
