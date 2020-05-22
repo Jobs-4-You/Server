@@ -38,7 +38,7 @@ class CreateUser(graphene.Mutation):
             error = parse_db_error(err)
             raise error
 
-        verification_token = create_auth_token(new_user.id)
+        verification_token = create_auth_token(new_user.id, 3600 * 24 * 1)
         verification_url = f"{config.APP_URL}/verify?token={verification_token}"
 
         send_mail(
