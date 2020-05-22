@@ -9,6 +9,7 @@ from j4u_api.database.models import Group as GroupModel
 from j4u_api.database.models import User as UserModel
 from j4u_api.gql.input_types import UserInput
 from j4u_api.gql.types import User
+from j4u_api.qualtrics import qual_client
 from j4u_api.utils.errors import parse_db_error
 from j4u_api.utils.mail import send_mail
 from j4u_api.utils.token import create_auth_token, extract_from_token
@@ -29,6 +30,8 @@ class CreateUser(graphene.Mutation):
         except jwt.ExpiredSignatureError:
             raise token_errors.ExpiredSignup
 
+        db_session.begin_nested()
+
         try:
             group = GroupModel.query.filter(GroupModel.id == group_id).first()
             new_user = UserModel(**user, group=group)
@@ -38,19 +41,22 @@ class CreateUser(graphene.Mutation):
             error = parse_db_error(err)
             raise error
 
-        verification_token = create_auth_token(new_user.id, 3600 * 24 * 1)
-        verification_url = f"{config.APP_URL}/verify?token={verification_token}"
+        try:
+            verification_token = create_auth_token(new_user.id, 3600 * 24 * 1)
+            verification_url = f"{config.APP_URL}/verify?token={verification_token}"
 
-        send_mail(
-            to=[new_user.email],
-            subject="J4U verification du compte",
-            template="verification",
-            link=verification_url,
-        )
+            send_mail(
+                to=[new_user.email],
+                subject="J4U verification du compte",
+                template="verification",
+                link=verification_url,
+            )
+            qual_client.create_contact(new_user.email)
+        except Exception as err:
+            db_session.rollback()
+            raise err
 
-        user_dict = new_user.to_dict()
-        del user_dict["password_hash"]
-        return CreateUser(user=user_dict)
+        return CreateUser(user=new_user)
 
 
 class VerifyUser(graphene.Mutation):
