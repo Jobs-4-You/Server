@@ -29,7 +29,7 @@ class CreateUser(graphene.Mutation):
         except jwt.DecodeError:
             raise token_errors.InvalidSignupLink()
         except jwt.ExpiredSignatureError:
-            raise token_errors.ExpiredSignup
+            raise token_errors.ExpiredSignupLink()
 
         try:
             group = GroupModel.query.filter(GroupModel.id == group_id).first()
