@@ -13,8 +13,7 @@ def auth_middleware(next, root, info, **args):
             user_id = extract_from_token(token)["user_id"]
             user = User.query.get(user_id)
         except jwt.DecodeError as err:
-            print("DcodeError")
-            print(err)
+            raise err
         except jwt.ExpiredSignatureError:
             raise SessionExpired()
 

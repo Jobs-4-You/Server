@@ -7,6 +7,7 @@ from j4u_api.config import config
 from j4u_api.database import db_session
 from j4u_api.database.models import Group as GroupModel
 from j4u_api.database.models import User as UserModel
+from j4u_api.errors.qulatrics_errors import ContactAlreadyExists
 from j4u_api.gql.input_types import UserInput
 from j4u_api.gql.types import User
 from j4u_api.qualtrics import qual_client
@@ -30,18 +31,11 @@ class CreateUser(graphene.Mutation):
         except jwt.ExpiredSignatureError:
             raise token_errors.ExpiredSignup
 
-        db_session.begin_nested()
-
         try:
             group = GroupModel.query.filter(GroupModel.id == group_id).first()
             new_user = UserModel(**user, group=group)
             db_session.add(new_user)
-            db_session.commit()
-        except SQLAlchemyError as err:
-            error = parse_db_error(err)
-            raise error
 
-        try:
             verification_token = create_auth_token(new_user.id, 3600 * 24 * 1)
             verification_url = f"{config.APP_URL}/verify?token={verification_token}"
 
@@ -52,11 +46,16 @@ class CreateUser(graphene.Mutation):
                 link=verification_url,
             )
             qual_client.create_contact(new_user.email)
-        except Exception as err:
-            db_session.rollback()
-            raise err
+            db_session.commit()
+            return CreateUser(user=new_user)
 
-        return CreateUser(user=new_user)
+        except SQLAlchemyError as err:
+            error = parse_db_error(err)
+            raise error
+        except ContactAlreadyExists as err:
+            raise err
+        except Exception as err:
+            raise err
 
 
 class VerifyUser(graphene.Mutation):

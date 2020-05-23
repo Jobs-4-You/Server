@@ -29,7 +29,6 @@ def enrich(event, user):
 
 
 def create_session_time(event):
-    print("CREATE_SEESION_EVENT")
     id = f'{event["timestamp"]}:{event["user_id"]}:{event["ip"]}'
     payload = {"start": event["timestamp"], "end": event["timestamp"]}
     event["type"] = "SESSION_TIME"
@@ -39,7 +38,6 @@ def create_session_time(event):
 
 
 def update_session_time(last, event):
-    print("UPDATE_SESSION_EVENT")
     e = EventModel.get(id=last.meta.id)
     e.payload["end"] = event["timestamp"]
     e.timestamp = last.timestamp
@@ -48,9 +46,7 @@ def update_session_time(last, event):
 
 
 def create_event(event):
-    print("CREATE_EVENT")
     id = f'{event["timestamp"]}:{event["user_id"]}:{event["ip"]}'
-    print(event)
     x = EventModel(meta={"id": id}, **event)
     x.save()
     return x
@@ -68,9 +64,7 @@ def handle_session_time(event):
         return create_session_time(event)
     else:
         last = res[0]
-        print(event["timestamp"], last.payload["end"])
         seconds_diff = (event["timestamp"] - parse(last.payload["end"])).total_seconds()
-        print(seconds_diff)
         if seconds_diff <= int(config.HEARTBEAT_MAX_INTERVAL):
             return update_session_time(last, event)
         else:

@@ -12,10 +12,6 @@ def _get_path(d, path):
             next_dict = next_dict if next_dict is not None else {}
             return f(next_dict, remaining_parts)
         elif len(parts) == 1:
-            if curr_obj is None:
-                from j4u_api.utils.print import pretty_print
-
-                pretty_print(d)
             return curr_obj.get(parts[0])
         else:
             raise Exception("Invalid path parts")

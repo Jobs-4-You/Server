@@ -36,8 +36,6 @@ app.config.update(
 )
 
 mail.init_app(app)
-# with mail.connect() as conn:
-#    print(conn)
 
 
 app.add_url_rule(

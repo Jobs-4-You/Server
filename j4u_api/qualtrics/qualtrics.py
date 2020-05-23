@@ -1,6 +1,7 @@
 import requests
 
 from j4u_api.config import config
+from j4u_api.errors.qulatrics_errors import ContactAlreadyExists
 
 from .export import export
 
@@ -114,11 +115,10 @@ class Qualtrics:
         mlist = self.get_j4u_mailinglist()
 
         contacts = self.get_j4u_contacts()
-        print(contacts)
         exists = email in [x["email"] for x in contacts]
 
         if exists:
-            raise Exception(f"Contact with email: {email} already exists")
+            raise ContactAlreadyExists(email)
 
         mlist_id = mlist["id"]
         url = f"{self.base_url}/mailinglists/{mlist_id}/contacts"
@@ -141,7 +141,6 @@ class Qualtrics:
         url = f"{self.base_url}/distributions/{distribution_id}"
         res = self._make_request("DELETE", url)
         data = res.json()
-        print(data, "aaaaaaaaa")
         return data
 
     def delete_all_distributions(self, survey_id):

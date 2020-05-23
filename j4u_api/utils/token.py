@@ -10,7 +10,6 @@ def extract_from_token(token):
 
 
 def create_auth_token(user_id, exp_time):
-    print(exp_time, "-" * 100)
     exp = datetime.utcnow() + timedelta(seconds=exp_time)
     return jwt.encode(
         {"user_id": user_id, "exp": exp}, config.JWT_KEY, algorithm="HS256"

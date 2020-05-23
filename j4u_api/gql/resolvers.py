@@ -55,7 +55,6 @@ def resolve_job_search_hints(parent, info, query, limit=5):
     #    query = query | q
     query = query.lower()
     qq = " AND ".join([f"({x}*)" for x in query.split()])
-    print(qq)
 
     query = Q("query_string", query=qq, fields=["title"])
 

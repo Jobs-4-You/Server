@@ -126,7 +126,6 @@ class Engine:
             var[10],
             var[11],
         ]
-        print(list_var)
         # The weight Importance of the old Position values
         weight_oldPos_alpha = var[12] / 100
 
@@ -134,13 +133,10 @@ class Engine:
 
         oldPos = var[13]
 
-        print(list_var, oldPos, weight_oldPos_alpha, abilitiesImportance_beta)
-
         # Return the list of jobs that are the closest to the parameters we did input
         res = self.compute_dist(
             list_var, oldPos, weight_oldPos_alpha, abilitiesImportance_beta
         )
-        print("Done ! ")
 
         isco08_list = list(res[0])
         job_title_list = []

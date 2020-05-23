@@ -29,6 +29,4 @@ class UpdateGroupConfig(graphene.Mutation):
         db_session.add(group)
         db_session.commit()
         group = GroupModel.query.get(group_id)
-        print(group_data)
-        print(group)
         return UpdateGroupConfig(group=group)
