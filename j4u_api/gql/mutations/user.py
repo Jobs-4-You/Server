@@ -35,6 +35,7 @@ class CreateUser(graphene.Mutation):
             group = GroupModel.query.filter(GroupModel.id == group_id).first()
             new_user = UserModel(**user, group=group)
             db_session.add(new_user)
+            db_session.flush()
 
             verification_token = create_auth_token(new_user.id, 3600 * 24 * 1)
             verification_url = f"{config.APP_URL}/verify?token={verification_token}"
