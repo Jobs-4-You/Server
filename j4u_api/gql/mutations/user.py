@@ -72,7 +72,7 @@ class VerifyUser(graphene.Mutation):
         except jwt.ExpiredSignatureError:
             raise token_errors.ExpiredVerificationLink()
 
-        user = UserModel.query.filter(UserModel.id == user_id).first()
+        user = UserModel.query.filter(UserModel.id == int(user_id)).first()
         user.verified = True
         db_session.add(user)
         db_session.commit()
