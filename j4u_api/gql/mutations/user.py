@@ -54,7 +54,9 @@ class CreateUser(graphene.Mutation):
             error = parse_db_error(err)
             raise error
         except ContactAlreadyExists as err:
-            raise err
+            print(err)
+            db_session.commit()
+            return CreateUser(user=new_user)
         except Exception as err:
             raise err
 
