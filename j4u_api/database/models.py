@@ -124,7 +124,7 @@ class User(Base):
     @hybrid_property
     def baseline_link(self):
         base_url = "https://fpse.qualtrics.com/jfe/form"
-        return f"{base_url}/{self.group.baseline_id}?={self.survey_id}"
+        return f"{base_url}/{self.group.baseline_id}?id={self.survey_id}"
 
 
 class DatetimeJob(Base):
