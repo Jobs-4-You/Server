@@ -82,6 +82,7 @@ def get_final_df(surveys_data, configs):
         df_cruiser = preprocess_cuiser(data["cruiser"], qualtrics_names)
         df = pd.concat([df_baseline, df_cruiser], axis=1, join="inner")
         df["group"] = group_name
+        print(df)
         dfs.append(df)
     df_final = pd.concat(dfs)
 
