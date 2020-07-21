@@ -55,6 +55,7 @@ async def exec_campaigns():
         valid_emails = [u.email for u in users] + [
             "test@yopmail.com",
             "yap@yopmail.com",
+            "jimi.vaubien@protonmail.com",
         ]
         links = qual_client.get_distribution_links(
             params["distribId"], params["surveyId"]
