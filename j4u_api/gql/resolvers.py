@@ -26,6 +26,12 @@ def resolve_all_groups(parent, info):
     return query.all()
 
 
+# @roles_required([RoleEnum.ADMIN])
+def resolve_all_datetime_jobs(parent, info):
+    query = models.DatetimeJob.query
+    return query.all()
+
+
 @jwt_auth_required
 def resolve_me(parent, info):
     return info.context.user

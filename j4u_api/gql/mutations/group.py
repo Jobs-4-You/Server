@@ -1,4 +1,3 @@
-
 import graphene
 
 from j4u_api.database import db_session

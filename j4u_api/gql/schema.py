@@ -8,6 +8,9 @@ import j4u_api.gql.types as types
 class Query(graphene.ObjectType):
     all_users = graphene.List(types.User, resolver=resolvers.resolve_all_users)
     all_groups = graphene.List(types.Group, resolver=resolvers.resolve_all_groups)
+    all_datetime_jobs = graphene.List(
+        types.DatetimeJob, resolver=resolvers.resolve_all_datetime_jobs
+    )
     me = graphene.Field(types.User, resolver=resolvers.resolve_me)
     get_signup_link = graphene.Field(
         types.SignupUrl,
@@ -46,6 +49,8 @@ class Mutation(graphene.ObjectType):
     verify_user = mutations.VerifyUser.Field()
     update_group_config = mutations.UpdateGroupConfig.Field()
     create_event = mutations.CreateEvent.Field()
+    create_datetime_job = mutations.CreateDatetimeJob.Field()
+    delete_datetime_job = mutations.DeleteDatetimeJob.Field()
 
 
 schema = graphene.Schema(query=Query, mutation=Mutation)

@@ -30,3 +30,10 @@ class GroupInput(graphene.InputObjectType):
 class EventInput(graphene.InputObjectType):
     type = graphene.String(required=True)
     payload = graphene.JSONString()
+
+
+class DatetimeJobInput(graphene.InputObjectType):
+    name = graphene.String(required=True)
+    action = graphene.String(required=True)
+    params = graphene.JSONString(required=True)
+    execution_date = graphene.DateTime(required=True)

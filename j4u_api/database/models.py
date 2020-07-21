@@ -1,6 +1,8 @@
 import random
+from datetime import datetime
 
 import sqlalchemy as S
+from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.ext.hybrid import hybrid_property
@@ -133,4 +135,7 @@ class DatetimeJob(Base):
     name = S.Column(S.String(64), nullable=False)
     state = S.Column(S.String(64), nullable=False, default="PENDING")
     action = S.Column(S.String(64), nullable=False)
-    params = S.Column(S.String(64), nullable=False)
+    params = S.Column(JSONB, nullable=False)
+    creation_date = S.Column(S.DateTime, default=datetime.now)
+    execution_date = S.Column(S.DateTime, nullable=False)
+    executed_date = S.Column(S.DateTime, nullable=True)

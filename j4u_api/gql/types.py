@@ -149,3 +149,14 @@ class Event(graphene.ObjectType):
 
     def resolve_user(parent, info):
         return models.User.query.get(parent.user_id)
+
+
+class DatetimeJob(graphene.ObjectType):
+    id = graphene.ID(required=True)
+    name = graphene.String(required=True)
+    state = graphene.String(required=True)
+    action = graphene.String(required=True)
+    params = graphene.JSONString(required=True)
+    creation_date = graphene.DateTime(required=True)
+    execution_date = graphene.DateTime(required=True)
+    executed_date = graphene.DateTime()
