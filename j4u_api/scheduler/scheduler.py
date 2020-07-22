@@ -86,6 +86,11 @@ async def exec_campaigns():
 
         campaign = DatetimeJobModel.query.get(campaign.id)
         campaign.state = "SUCCESS"
+        print(list(emails))
+        pp = dict(campaign.params)
+        pp["emailsMatched"] = list(emails)
+        print(pp)
+        campaign.params = pp
         db_session.add(campaign)
         db_session.commit()
 
