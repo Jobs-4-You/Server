@@ -172,5 +172,5 @@ async def get_features():
     df_final = get_final_df(surveys_data, configs)
 
     users_updated = to_db(df_final, configs)
-    print("Import done.")
+    print("Import done, .")
     return users_updated

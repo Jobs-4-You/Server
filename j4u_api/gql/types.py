@@ -17,6 +17,11 @@ class Feature(SQLAlchemyObjectType):
         model = models.Feature
 
 
+class FeatureConfig(SQLAlchemyObjectType):
+    class Meta:
+        model = models.FeatureConfig
+
+
 class Group(SQLAlchemyObjectType):
     class Meta:
         model = models.Group
