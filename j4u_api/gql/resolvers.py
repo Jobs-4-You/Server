@@ -48,6 +48,7 @@ def resolve_all_surveys(parent, info):
     res = []
     data = qual_client.list_surveys()
     data = humps.decamelize(data)
+    data = sorted(data, key=lambda x: x["name"])
     for d in data:
         sm = types.SurveyMeta(**d)
         res.append(sm)

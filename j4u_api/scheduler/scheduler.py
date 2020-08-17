@@ -50,7 +50,7 @@ async def exec_campaigns():
         users = UserModel.query.filter(
             UserModel.form_done_at >= params["cohortStart"],
             UserModel.form_done_at <= params["cohortEnd"],
-            UserModel.group_id == params["groupId"],
+            UserModel.group_id.in_(params["groupId"]),
         ).all()
         valid_emails = [u.email for u in users] + [
             "test@yopmail.com",
