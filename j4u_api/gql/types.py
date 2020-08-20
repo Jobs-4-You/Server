@@ -27,9 +27,14 @@ class Group(SQLAlchemyObjectType):
         model = models.Group
 
 
-class UICongif(SQLAlchemyObjectType):
+class Cohort(SQLAlchemyObjectType):
     class Meta:
-        model = models.UIConfig
+        model = models.Cohort
+
+
+class Activity(SQLAlchemyObjectType):
+    class Meta:
+        model = models.Activity
 
 
 class SignupUrl(graphene.ObjectType):

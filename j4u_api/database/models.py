@@ -61,27 +61,25 @@ class Feature(Base):
     value = S.Column(S.Float, nullable=False)
 
 
-class UIConfig(Base):
-    __tablename__ = "ui_configs"
-    id = S.Column(S.Integer, primary_key=True)
-    group_id = S.Column(S.ForeignKey("groups.id"), nullable=False)
-    group = relationship("Group", back_populates="ui_config")
-    search = S.Column(S.Boolean, default=False)
-    recommendations = S.Column(S.Boolean, default=False)
-    alpha_fixed = S.Column(S.Boolean, default=False)
-    beta_fixed = S.Column(S.Boolean, default=False)
-
-
 class Group(Base):
     __tablename__ = "groups"
     id = S.Column(S.Integer, primary_key=True)
     name = S.Column(S.String(64), nullable=False)
-    ui_config = relationship(
-        "UIConfig", uselist=False, back_populates="group", cascade="all, delete-orphan"
-    )
     users = relationship("User", back_populates="group")
     baseline_id = S.Column(S.String(64))
     cruiser_id = S.Column(S.String(64))
+
+
+class Cohort(Base):
+    __tablename__ = "cohorts"
+    id = S.Column(S.Integer, primary_key=True)
+    group_id = S.Column(S.ForeignKey("groups.id"), nullable=False)
+    group = relationship("Group", back_populates="ui_config")
+    cohort_start = S.Column(S.DateTime, nullalbe=False)
+    cohort_end = S.Column(S.DateTime, nullalbe=False)
+    recommendations = S.Column(S.Boolean, default=False)
+    alpha_fixed = S.Column(S.Boolean, default=False)
+    beta_fixed = S.Column(S.Boolean, default=False)
 
 
 class User(Base):
@@ -139,3 +137,10 @@ class DatetimeJob(Base):
     creation_date = S.Column(S.DateTime, default=datetime.now)
     execution_date = S.Column(S.DateTime, nullable=False)
     executed_date = S.Column(S.DateTime, nullable=True)
+
+
+class Activity(Base):
+    __tablename__ = "activities"
+    id = S.Column(S.Integer, primary_key=True)
+    created_at = S.Column(S.DateTime, default=datetime.now)
+    params = S.Column(JSONB, nullable=False)

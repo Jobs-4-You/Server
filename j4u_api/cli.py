@@ -20,8 +20,8 @@ def fresh_start(seed_test):
     reset_db()
     reset_migrations()
     migrate()
-    reset_elastic_db()
-    seed_elastic()
+    # reset_elastic_db()
+    # seed_elastic()
     if seed_test:
         seed_testing()
 
