@@ -2,7 +2,7 @@ import random
 from datetime import datetime
 
 from j4u_api.database import db_session, engine
-from j4u_api.database.models import Base, Feature, FeatureConfig, Group, UIConfig, User
+from j4u_api.database.models import Base, Feature, FeatureConfig, Group, User
 
 baseline_ids = {
     "COG": "SV_emNJjF8ZCQPAyA5",
@@ -160,12 +160,7 @@ def seed_testing():
     for (name, baseline_id), (_, cruiser_id) in zip(
         baseline_ids.items(), cruiser_ids.items()
     ):
-        g = Group(
-            name=name,
-            baseline_id=baseline_id,
-            cruiser_id=cruiser_id,
-            ui_config=UIConfig(),
-        )
+        g = Group(name=name, baseline_id=baseline_id, cruiser_id=cruiser_id,)
         groups.append(g)
 
     admin = User(

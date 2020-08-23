@@ -6,7 +6,14 @@ from graphene_sqlalchemy import SQLAlchemyObjectType
 import j4u_api.database.models as models
 
 
+class Cohort(SQLAlchemyObjectType):
+    class Meta:
+        model = models.Cohort
+
+
 class User(SQLAlchemyObjectType):
+    cohort = graphene.Field(Cohort)
+
     class Meta:
         model = models.User
         exclude_fields = ("password_hash",)
@@ -25,11 +32,6 @@ class FeatureConfig(SQLAlchemyObjectType):
 class Group(SQLAlchemyObjectType):
     class Meta:
         model = models.Group
-
-
-class Cohort(SQLAlchemyObjectType):
-    class Meta:
-        model = models.Cohort
 
 
 class Activity(SQLAlchemyObjectType):

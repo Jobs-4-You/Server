@@ -3,7 +3,6 @@ import graphene
 from j4u_api.database import db_session
 from j4u_api.database.enums import RoleEnum
 from j4u_api.database.models import Group as GroupModel
-from j4u_api.database.models import UIConfig as UIConfigModel
 from j4u_api.gql.input_types import GroupInput
 from j4u_api.gql.types import Group
 from j4u_api.utils.auth import roles_required
@@ -19,11 +18,8 @@ class UpdateGroupConfig(graphene.Mutation):
     @roles_required([RoleEnum.ADMIN])
     def mutate(root, info, group_id, group_data):
         group = GroupModel.query.get(group_id)
-        ui_config = group_data.pop("ui_config")
         for k, v in group_data.items():
             setattr(group, k, v)
-
-        group.ui_config = UIConfigModel(**ui_config)
 
         db_session.add(group)
         db_session.commit()

@@ -14,7 +14,7 @@ from j4u_api.utils.func import pick_rename
 from j4u_api.utils.token import create_signup_token
 
 
-@roles_required([RoleEnum.ADMIN])
+# @roles_required([RoleEnum.ADMIN])
 def resolve_all_users(parent, info):
     query = models.User.query
     return query.all()
@@ -23,6 +23,12 @@ def resolve_all_users(parent, info):
 @roles_required([RoleEnum.ADMIN])
 def resolve_all_groups(parent, info):
     query = models.Group.query.order_by(models.Group.name)
+    return query.all()
+
+
+# @roles_required([RoleEnum.ADMIN])
+def resolve_all_cohorts(parent, info):
+    query = models.Cohort.query.order_by(models.Cohort.name)
     return query.all()
 
 

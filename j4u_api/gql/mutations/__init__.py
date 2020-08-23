@@ -1,4 +1,5 @@
 from .auth import Auth
+from .cohort import CreateCohort, UpdateCohort
 from .datetime_job import CreateDatetimeJob, DeleteDatetimeJob
 from .event import CreateEvent
 from .group import UpdateGroupConfig
@@ -12,4 +13,6 @@ __all__ = [
     "CreateEvent",
     "CreateDatetimeJob",
     "DeleteDatetimeJob",
+    "CreateCohort",
+    "UpdateCohort",
 ]

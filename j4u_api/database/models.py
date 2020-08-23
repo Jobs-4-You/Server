@@ -66,6 +66,7 @@ class Group(Base):
     id = S.Column(S.Integer, primary_key=True)
     name = S.Column(S.String(64), nullable=False)
     users = relationship("User", back_populates="group")
+    cohorts = relationship("Cohort", back_populates="group")
     baseline_id = S.Column(S.String(64))
     cruiser_id = S.Column(S.String(64))
 
@@ -73,10 +74,12 @@ class Group(Base):
 class Cohort(Base):
     __tablename__ = "cohorts"
     id = S.Column(S.Integer, primary_key=True)
+    name = S.Column(S.String(64), nullable=False)
     group_id = S.Column(S.ForeignKey("groups.id"), nullable=False)
-    group = relationship("Group", back_populates="ui_config")
-    cohort_start = S.Column(S.DateTime, nullalbe=False)
-    cohort_end = S.Column(S.DateTime, nullalbe=False)
+    group = relationship(Group, back_populates="cohorts", uselist=False)
+    cohort_start = S.Column(S.Date, nullable=False)
+    cohort_end = S.Column(S.Date, nullable=False)
+    search = S.Column(S.Boolean, default=False)
     recommendations = S.Column(S.Boolean, default=False)
     alpha_fixed = S.Column(S.Boolean, default=False)
     beta_fixed = S.Column(S.Boolean, default=False)
@@ -125,6 +128,17 @@ class User(Base):
     def baseline_link(self):
         base_url = "https://fpse.qualtrics.com/jfe/form"
         return f"{base_url}/{self.group.baseline_id}?id={self.survey_id}"
+
+    @hybrid_property
+    def cohort(self):
+        if self.form_done_at is not None:
+            return Cohort.query.filter(
+                Cohort.cohort_start <= self.form_done_at,
+                Cohort.cohort_end >= self.form_done_at,
+                Cohort.group_id >= self.group_id,
+            ).fist()
+        else:
+            return None
 
 
 class DatetimeJob(Base):
