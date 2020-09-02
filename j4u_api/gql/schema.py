@@ -50,7 +50,7 @@ class Mutation(graphene.ObjectType):
     create_user = mutations.CreateUser.Field()
     verify_user = mutations.VerifyUser.Field()
     update_group_config = mutations.UpdateGroupConfig.Field()
-    create_event = mutations.CreateEvent.Field()
+    create_activity = mutations.CreateActivity.Field()
     create_datetime_job = mutations.CreateDatetimeJob.Field()
     delete_datetime_job = mutations.DeleteDatetimeJob.Field()
     create_cohort = mutations.CreateCohort.Field()

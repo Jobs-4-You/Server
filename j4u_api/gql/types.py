@@ -7,6 +7,8 @@ import j4u_api.database.models as models
 
 
 class Cohort(SQLAlchemyObjectType):
+    users = graphene.List(lambda: User)
+
     class Meta:
         model = models.Cohort
 
@@ -147,20 +149,6 @@ class RecommendationResult(graphene.ObjectType):
     var_list = graphene.List(graphene.Float, required=True)
     importances = graphene.List(graphene.Float, required=True)
     results = graphene.List(IndividuaJobRecommendation, required=True)
-
-
-class Event(graphene.ObjectType):
-    id = graphene.ID(required=True)
-    timestamp = graphene.DateTime(required=True)
-    user_agent = graphene.String(required=True)
-    ip = graphene.String(required=True)
-    type = graphene.String(required=True)
-    user_id = graphene.Int(required=True)
-    user = graphene.Field(User)
-    payload = graphene.JSONString()
-
-    def resolve_user(parent, info):
-        return models.User.query.get(parent.user_id)
 
 
 class DatetimeJob(graphene.ObjectType):

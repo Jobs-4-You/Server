@@ -84,6 +84,15 @@ class Cohort(Base):
     alpha_fixed = S.Column(S.Boolean, default=False)
     beta_fixed = S.Column(S.Boolean, default=False)
 
+    @hybrid_property
+    def users(self):
+        return User.query.filter(
+            User.form_done_at.isnot(None),
+            User.form_done_at >= self.cohort_start,
+            User.form_done_at <= self.cohort_end,
+            User.group_id == self.group_id,
+        ).all()
+
 
 class User(Base):
     __tablename__ = "users"
@@ -132,11 +141,17 @@ class User(Base):
     @hybrid_property
     def cohort(self):
         if self.form_done_at is not None:
+            print(self.form_done_at)
+            print(self.group_id)
+
+            a = Cohort.query.all()
+            print(a)
+
             return Cohort.query.filter(
                 Cohort.cohort_start <= self.form_done_at,
                 Cohort.cohort_end >= self.form_done_at,
-                Cohort.group_id >= self.group_id,
-            ).fist()
+                Cohort.group_id == self.group_id,
+            ).first()
         else:
             return None
 
@@ -156,5 +171,10 @@ class DatetimeJob(Base):
 class Activity(Base):
     __tablename__ = "activities"
     id = S.Column(S.Integer, primary_key=True)
-    created_at = S.Column(S.DateTime, default=datetime.now)
-    params = S.Column(JSONB, nullable=False)
+    timestamp = S.Column(S.DateTime, default=datetime.now)
+    user_agent = S.Column(S.String(128), nullable=False)
+    ip = S.Column(S.String(64), nullable=False)
+    type = S.Column(S.String(64), nullable=False)
+    user_id = S.Column(S.Integer, S.ForeignKey("users.id"))
+    user = relationship("User", foreign_keys=[user_id])
+    payload = S.Column(JSONB, nullable=False)

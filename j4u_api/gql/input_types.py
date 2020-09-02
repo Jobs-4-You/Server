@@ -30,7 +30,7 @@ class GroupInput(graphene.InputObjectType):
     cruiser_id = graphene.ID(required=True)
 
 
-class EventInput(graphene.InputObjectType):
+class ActivityInput(graphene.InputObjectType):
     type = graphene.String(required=True)
     payload = graphene.JSONString()
 

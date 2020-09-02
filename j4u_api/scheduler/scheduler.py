@@ -1,11 +1,13 @@
 import asyncio
 import logging.config
 import time
+import traceback
 from datetime import datetime
 
 from j4u_api.app.app import app
 from j4u_api.config import config
 from j4u_api.database.connection import db_session
+from j4u_api.database.models import Cohort as CohortModel
 from j4u_api.database.models import DatetimeJob as DatetimeJobModel
 from j4u_api.database.models import User as UserModel
 from j4u_api.qualtrics import qual_client
@@ -47,12 +49,13 @@ async def exec_campaigns():
         db_session.commit()
 
         params = campaign.params
-        users = UserModel.query.filter(
-            UserModel.form_done_at >= params["cohortStart"],
-            UserModel.form_done_at <= params["cohortEnd"],
-            UserModel.group_id.in_(params["groupId"]),
-        ).all()
-        valid_emails = [u.email for u in users] + [
+        user_emails = []
+        for cohort_id in params["cohortId"]:
+            user_emails += [x.email for x in CohortModel.query.get(cohort_id).users]
+
+        print(user_emails)
+
+        valid_emails = user_emails + [
             "test@yopmail.com",
             "yap@yopmail.com",
             "jimi.vaubien@protonmail.com",
@@ -113,6 +116,7 @@ async def interval_job(coro, args, interval):
             await coro(*args)
         except Exception as err:
             print(err)
+            traceback.print_exc()
         await asyncio.sleep(interval)
 
 
@@ -144,8 +148,10 @@ class Scheduler:
 
     async def main(self):
         f = async_timeit(__name__)(get_features_and_send_emails)
+
         asyncio.create_task(interval_job(f, [], int(config.GET_FEATURES_JOB_INTERVAL)))
         asyncio.create_task(interval_job(exec_campaigns, [], 15))
+
         while True:
             await asyncio.sleep(10)
 

@@ -1,16 +1,18 @@
+import itertools as it
 import random
 from datetime import datetime
 
 from j4u_api.database import db_session, engine
 from j4u_api.database.models import Base, Feature, FeatureConfig, Group, User
+from j4u_api.qualtrics import qual_client
 
 baseline_ids = {
     "COG": "SV_emNJjF8ZCQPAyA5",
     "CONT": "SV_9LWr3TrjbpNEdMh",
     "J4U": "SV_eu2KVQoRYyVFsod",
     "J4U+COG": "SV_cVfzu7FqlpU53yl",
-    "NJS": "SV_esuuql0UxehGKfX",
-    "J4U+NJS": "SV_3lAWvHkJlxiWPBz",
+    # "NJS": "SV_esuuql0UxehGKfX",
+    # "J4U+NJS": "SV_3lAWvHkJlxiWPBz",
 }
 
 cruiser_ids = {
@@ -18,8 +20,8 @@ cruiser_ids = {
     "CONT": "SV_2fAdbnvAnNMNQgd",
     "J4U": "SV_3PjMqEIEXB52z7T",
     "J4U+COG": "SV_ePrAxjj45PZYMu1",
-    "NJS": "SV_dm75q6TZbF7mEOV",
-    "J4U+NJS": "SV_1ZwZeMCHJD0qrul",
+    # "NJS": "SV_dm75q6TZbF7mEOV",
+    # "J4U+NJS": "SV_1ZwZeMCHJD0qrul",
 }
 
 features_configs = [
@@ -33,7 +35,7 @@ features_configs = [
         "inverse": False,
     },
     {
-        "qualtrics_name": "Sc_Induc_Reas",
+        "qualtrics_name": "Sc_Tot_IR",
         "engine_name": "var2",
         "from_min": 0,
         "from_max": 8,
@@ -132,18 +134,6 @@ features_configs = [
         "inverse": False,
     },
 ]
-#    "": ("var1", partial(min_max_scaler, [0, 30], [1, 7])),
-#    "Sc_Induc_Reas": ("var2", partial(min_max_scaler, [0, 8], [1, 7])),
-#    "score_matrices": ("var3", partial(min_max_scaler, [0, 1], [1, 7])),
-#    "Sc_WM": ("var4", partial(min_max_scaler, [0, 12], [1, 7])),
-#    "Sc_MOY_RT": ("var5", partial(min_max_scaler, [0, 5], [1, 7], inverse=True)),
-#    "Sc_Verbal_Com": ("var6", partial(min_max_scaler, [0, 48], [1, 7])),
-#    "score_PM": ("var7", partial(min_max_scaler, [0, 1], [1, 7])),
-#    "score_metacog": ("var8", partial(min_max_scaler, [0, 1], [1, 7], inverse=True)),
-#    "Sc_Leader": ("var9", partial(min_max_scaler, [6, 24], [1, 5])),
-#    "Sc_Self_cont": ("var10", partial(min_max_scaler, [13, 65], [1, 5])),
-#    "Sc_Stress_Tol": ("var11", partial(min_max_scaler, [0, 40], [1, 5], inverse=True)),
-#    "Sc_Adapt": ("var12", partial(min_max_scaler, [8, 40], [1, 5])),
 
 
 def seed_testing():
@@ -179,26 +169,35 @@ def seed_testing():
     group_based_users = []
     group_based_features = []
     for group in groups:
-        user = User(
-            civilite="M",
-            role="USER",
-            first_name="John",
-            last_name="Doe",
-            birth_date="2000-01-01",
-            phone=str(random.randint(1e6, 1e7)),
-            email=f"{group.name.lower()}@yopmail.com",
-            password="jdida",
-            survey_id=str(random.randint(1e8, 1e9)),
-            verified=True,
-            form_done=True,
-            form_done_at=datetime.now(),
-            group=group,
-        )
-        db_session.add(user)
-        db_session.flush()
-        for fc in fcs:
-            f = Feature(user_id=user.id, feature_config_id=fc.id, value=3)
-            group_based_features.append(f)
+        for i, month in it.product(range(2), range(1, 4)):
+            group_mail = "".join([x for x in group.name.lower() if x.isalnum()])
+            day = i + 5
+            form_done_at = f"2019-{month}-{day}"
+            email = f"{group_mail}-{month}-{day}@yopmail.com"
+            print(email)
+
+            # qual_client.create_contact(email)
+
+            user = User(
+                civilite="M",
+                role="USER",
+                first_name="John",
+                last_name="Doe",
+                birth_date="2000-01-01",
+                phone=str(random.randint(1e6, 1e7)),
+                email=email,
+                password="jdida",
+                survey_id=str(random.randint(1e8, 1e9)),
+                verified=True,
+                form_done=True,
+                form_done_at=form_done_at,
+                group=group,
+            )
+            db_session.add(user)
+            db_session.flush()
+            for fc in fcs:
+                f = Feature(user_id=user.id, feature_config_id=fc.id, value=3)
+                group_based_features.append(f)
 
     db_session.add(admin)
     db_session.add_all(group_based_users)

@@ -118,7 +118,9 @@ class Qualtrics:
         exists = email in [x["email"] for x in contacts]
 
         if exists:
-            raise ContactAlreadyExists(email)
+            print("Contact already exists")
+            return
+            # raise ContactAlreadyExists(email)
 
         mlist_id = mlist["id"]
         url = f"{self.base_url}/mailinglists/{mlist_id}/contacts"

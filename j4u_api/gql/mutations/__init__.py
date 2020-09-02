@@ -1,7 +1,7 @@
+from .activity import CreateActivity
 from .auth import Auth
 from .cohort import CreateCohort, UpdateCohort
 from .datetime_job import CreateDatetimeJob, DeleteDatetimeJob
-from .event import CreateEvent
 from .group import UpdateGroupConfig
 from .user import CreateUser, VerifyUser
 
@@ -10,7 +10,7 @@ __all__ = [
     "CreateUser",
     "VerifyUser",
     "UpdateGroupConfig",
-    "CreateEvent",
+    "CreateActivity",
     "CreateDatetimeJob",
     "DeleteDatetimeJob",
     "CreateCohort",

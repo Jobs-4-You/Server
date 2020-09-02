@@ -9,7 +9,6 @@ from flask_cors import CORS, cross_origin
 from flask_graphql import GraphQLView
 from weasyprint import HTML
 
-import j4u_api.elastic_db
 from j4u_api.config import config
 from j4u_api.database import db_session
 from j4u_api.gql import schema

@@ -7,6 +7,7 @@ from j4u_api.config import config
 from j4u_api.database.connection import db_session
 from j4u_api.database.enums import RoleEnum
 from j4u_api.job_room import job_room_client
+from j4u_api.job_search import job_search_client
 from j4u_api.qualtrics import qual_client
 from j4u_api.recommendations import recom_engine
 from j4u_api.utils.auth import jwt_auth_required, roles_required
@@ -62,24 +63,8 @@ def resolve_all_surveys(parent, info):
 
 
 def resolve_job_search_hints(parent, info, query, limit=5):
-    # qs = [Q("fuzzy", title=q) for q in query.split()]
-    # query = qs.pop()
-    # for q in qs:
-    #    query = query | q
-    query = query.lower()
-    qq = " AND ".join([f"({x}*)" for x in query.split()])
+    res = job_search_client.search(query=query, limit=limit)
 
-    query = Q("query_string", query=qq, fields=["title"])
-
-    s = Search(index="jobs").query(query)[:limit]
-    from j4u_api.utils.print import pretty_print
-
-    response = s.execute()
-    res = []
-    for hit in response:
-        meta = hit.meta
-        hit.id = meta.id
-        res.append(hit)
     return res
 
 

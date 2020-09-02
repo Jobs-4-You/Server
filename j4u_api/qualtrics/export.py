@@ -21,6 +21,7 @@ def export(token, data_center, survey_id):
 
     downloadRequestResponse = requests.request("POST", url, json=data, headers=headers)
 
+    print(downloadRequestResponse.json())
     progressId = downloadRequestResponse.json()["result"]["progressId"]
 
     isFile = None
@@ -35,7 +36,7 @@ def export(token, data_center, survey_id):
             isFile = requestCheckResponse.json()["result"]["fileId"]
         except KeyError:
             1 == 1
-        requestCheckProgress = requestCheckResponse.json()["result"]["percentComplete"]
+        # requestCheckProgress = requestCheckResponse.json()["result"]["percentComplete"]
         progressStatus = requestCheckResponse.json()["result"]["status"]
 
     # step 2.1: Check for error
