@@ -30,10 +30,6 @@ class Config:
     POSTGRES_DB = None
     POSTGRES_IP = None
 
-    # Elastic
-    ELASTIC_PW = None
-    ELASTIC_IP = None
-
     # Qualtrics
     QUALTRICS_TOKEN = None
     QUALTRICS_USER = None
@@ -73,10 +69,6 @@ class Config:
             f"postgresql://{self.POSTGRES_USER}:{self.POSTGRES_PW}@"
             f"{self.POSTGRES_IP}/{self.POSTGRES_DB}"
         )
-
-    @property
-    def ELASTIC_URL(self):
-        return f"elastic:{self.ELASTIC_PW}@{self.ELASTIC_IP}"
 
     @property
     def ROOT_DIR(self):
