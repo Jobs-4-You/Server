@@ -54,7 +54,7 @@ class Mutation(graphene.ObjectType):
     create_datetime_job = mutations.CreateDatetimeJob.Field()
     delete_datetime_job = mutations.DeleteDatetimeJob.Field()
     create_cohort = mutations.CreateCohort.Field()
-    udpate_cohort = mutations.UpdateCohort.Field()
+    update_cohort = mutations.UpdateCohort.Field()
 
 
 schema = graphene.Schema(query=Query, mutation=Mutation)

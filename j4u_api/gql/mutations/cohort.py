@@ -33,9 +33,13 @@ class UpdateCohort(graphene.Mutation):
     @roles_required([RoleEnum.ADMIN])
     def mutate(root, info, cohort_id, cohort_data):
         cohort = CohortModel.query.get(cohort_id)
+        print(cohort)
         for k, v in cohort_data.items():
             setattr(cohort, k, v)
 
         db_session.add(cohort)
         db_session.commit()
+
+        print(cohort)
+        print(cohort.name)
         return UpdateCohort(cohort=cohort)
