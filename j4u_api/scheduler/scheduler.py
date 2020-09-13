@@ -65,7 +65,6 @@ async def exec_campaigns():
             "ioana.medeleine.c@gmail.com",
             "clemence.gallopin@unil.ch",
             "guillaume.rais.1@unil.ch",
-            "carole.marullaz@gmail.com",
         ]
         links = qual_client.get_distribution_links(
             params["distribId"], params["surveyId"]
