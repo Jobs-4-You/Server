@@ -50,10 +50,11 @@ async def exec_campaigns():
 
         params = campaign.params
         user_emails = []
+        email_survey_id_map = {}
         for cohort_id in params["cohortId"]:
-            user_emails += [x.email for x in CohortModel.query.get(cohort_id).users]
-
-        print(user_emails)
+            matched = CohortModel.query.get(cohort_id).users
+            user_emails += [x.email for x in matched]
+            email_survey_id_map.update([(x.email, x.survey_id) for x in matched])
 
         valid_emails = user_emails + [
             "test@yopmail.com",
@@ -66,15 +67,25 @@ async def exec_campaigns():
             "clemence.gallopin@unil.ch",
             "guillaume.rais.1@unil.ch",
         ]
+
         links = qual_client.get_distribution_links(
             params["distribId"], params["surveyId"]
         )
         for l in links:
             print(l["email"])
         print(valid_emails)
+
         emails, links = zip(
-            *[(l["email"], l["link"]) for l in links if l["email"] in valid_emails]
+            *[
+                (
+                    l["email"],
+                    f"{l['link']}?id={email_survey_id_map.get(l['email'], 'undefined')}",
+                )
+                for l in links
+                if l["email"] in valid_emails
+            ]
         )
+
         print(emails)
         print(valid_emails)
 

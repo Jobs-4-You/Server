@@ -43,6 +43,7 @@ class Engine:
         self.jobs = get_clean_jobs_df()
 
     def compute_dist(self, quest_point, past_occup, alpha, beta):
+        print(alpha, beta, "--")
         domains = pd.unique(self.data["Domain"])
 
         # Create a dictionary that will contain the df of the different domains
@@ -127,9 +128,9 @@ class Engine:
             var[11],
         ]
         # The weight Importance of the old Position values
-        weight_oldPos_alpha = var[12] / 100
+        weight_oldPos_alpha = var[12]  # / 100
 
-        abilitiesImportance_beta = var[14] / 100
+        abilitiesImportance_beta = var[14]  # / 100
 
         oldPos = var[13]
 

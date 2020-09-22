@@ -144,6 +144,7 @@ def resolve_positions(parent, info, profession_codes, page):
 
 @jwt_auth_required
 def resolve_recommendations(parent, info, old_job_isco08, old_job_title, alpha, beta):
+    print(alpha, beta)
     user = info.context.user
     features = [(x.feature_config.engine_name, x.value) for x in user.features]
     features = sorted(features, key=lambda x: x[0])
