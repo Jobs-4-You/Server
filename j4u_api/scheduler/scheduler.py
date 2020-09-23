@@ -79,7 +79,7 @@ async def exec_campaigns():
             *[
                 (
                     l["email"],
-                    f"{l['link']}?id={email_survey_id_map.get(l['email'], 'undefined')}",
+                    f"{l['link']}&id={email_survey_id_map.get(l['email'], 'undefined')}",
                 )
                 for l in links
                 if l["email"] in valid_emails
