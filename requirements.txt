@@ -77,7 +77,7 @@ prompt-toolkit==3.0.5
 protobuf==3.11.3
 psycopg2==2.8.4
 ptyprocess==0.6.0
-py==1.8.1
+py==1.10.0
 py-spy==0.3.3
 pycodestyle==2.5.0
 pycparser==2.20
